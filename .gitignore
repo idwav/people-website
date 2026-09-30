@@ -1,0 +1,5 @@
+.DS_Store
+# raw event footage (169MB) — too heavy for git, keep locally
+videos/*.mov
+.claude/settings.local.json
+_render-test.html
