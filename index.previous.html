@@ -1,0 +1,1320 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--ARTIFACT-START-->
+<title>קהילת PEOPLE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;500;700;900&family=Heebo:wght@200;300;500;800;900&display=swap">
+<style>
+/* ============================================================
+   PEOPLE — tokens
+   ============================================================ */
+:root{
+  --paper:#e9e7e2;
+  --paper-2:#dcd9d2;
+  --ink:#0c0d10;
+  --ink-2:#3a3c41;
+  --signal:#2b21f5;
+  --signal-text:#f1f0ff;
+
+  --surface:var(--paper);
+  --text:var(--ink);
+  --text-soft:#54565c;
+  --inv-surface:var(--ink);
+  --inv-text:var(--paper);
+  --rule:rgba(12,13,16,.16);
+  --rule-strong:rgba(12,13,16,.42);
+  --plate:#d3d0c9;
+  --plate-2:#bcb9b1;
+
+  --g:2.62rem;
+  --s1:.25rem; --s2:.5rem; --s3:1rem; --s4:1.25rem; --s5:1.5rem;
+  --s6:1.75rem; --s7:2rem; --s8:2.62rem; --s9:3rem; --s10:6.25rem; --s11:12.5rem;
+
+  --ease-mask:cubic-bezier(.05,.85,.13,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --surface:#0c0d10;
+    --text:#e9e7e2;
+    --text-soft:#9a9a98;
+    --inv-surface:#e9e7e2;
+    --inv-text:#0c0d10;
+    --rule:rgba(233,231,226,.18);
+    --rule-strong:rgba(233,231,226,.45);
+    --plate:#1a1b1f;
+    --plate-2:#26272c;
+    --signal:#4034ff;
+  }
+}
+:root[data-theme="dark"]{
+  --surface:#0c0d10;
+  --text:#e9e7e2;
+  --text-soft:#9a9a98;
+  --inv-surface:#e9e7e2;
+  --inv-text:#0c0d10;
+  --rule:rgba(233,231,226,.18);
+  --rule-strong:rgba(233,231,226,.45);
+  --plate:#1a1b1f;
+  --plate-2:#26272c;
+  --signal:#4034ff;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--text)}
+
+.app{
+  direction:rtl;
+  background:var(--surface);
+  color:var(--text);
+  font-family:"Heebo","Helvetica Neue",Arial,sans-serif;
+  font-weight:300;
+  font-size:1rem;
+  line-height:1.36;
+  letter-spacing:-.02em;
+  position:relative;
+}
+.app *{ box-sizing:border-box }
+
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+:where(a,button,summary,[tabindex]):focus-visible{
+  outline:2px solid currentColor;
+  outline-offset:3px;
+}
+
+/* ---------- layout ---------- */
+.gutter{padding-inline:var(--g)}
+.sec{position:relative;padding-block:var(--s10)}
+.rule{height:1px;background:var(--rule);border:0;margin:0}
+
+@media (max-width:991px){ :root{--g:1.75rem} }
+@media (max-width:767px){ :root{--g:1rem} }
+
+/* ---------- type ---------- */
+.display{
+  font-family:"Frank Ruhl Libre","Times New Roman",serif;
+  font-weight:900;
+  line-height:.92;
+  letter-spacing:-.035em;
+  margin:0;
+  text-wrap:balance;
+}
+.d1{font-size:clamp(3rem,11.2vw,9.5rem)}
+.d2{font-size:clamp(2.4rem,6.4vw,5.4rem)}
+.d3{font-size:clamp(1.6rem,3vw,2.6rem);line-height:1.02}
+
+.label{
+  font-family:"Heebo",sans-serif;
+  font-weight:900;
+  font-size:.72rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1;
+}
+.body{
+  font-weight:300;
+  font-size:1.0625rem;
+  line-height:1.55;
+  max-width:38ch;
+  color:var(--text);
+}
+.body--soft{color:var(--text-soft)}
+.serif{font-family:"Frank Ruhl Libre",serif;font-weight:300}
+@media (max-width:767px){ .body{font-size:1.125rem;line-height:1.52;max-width:none} }
+
+/* ---------- grain + cursor ---------- */
+.grain{
+  position:fixed;inset:-10%;
+  pointer-events:none;z-index:900;
+  opacity:.16;mix-blend-mode:multiply;
+}
+.cursor{
+  position:fixed;top:0;left:0;width:14px;height:14px;border-radius:50%;
+  background:var(--signal);
+  pointer-events:none;z-index:950;
+  transform:translate3d(-100px,-100px,0);
+  transition:opacity .2s;
+  margin:-7px 0 0 -7px;opacity:0;mix-blend-mode:multiply;
+}
+@media (hover:hover) and (pointer:fine){ .cursor{opacity:1} }
+@media (hover:none){ .cursor{display:none} }
+
+/* ---------- loader ---------- */
+.loader{
+  position:fixed;inset:0;z-index:1000;background:var(--ink);
+  display:grid;place-items:center;transform-origin:top center;
+}
+.loader__mark{
+  font-family:"Heebo",sans-serif;font-weight:900;color:var(--paper);
+  font-size:clamp(1.2rem,4vw,2.4rem);letter-spacing:.34em;padding-inline-start:.34em;
+}
+.loader__bar{
+  position:absolute;bottom:0;left:0;height:2px;background:var(--signal);width:0;
+}
+
+/* ---------- nav ---------- */
+.nav{
+  position:fixed;top:0;right:0;left:0;z-index:800;height:3.75rem;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding-inline:var(--g);
+  background:var(--surface);
+  border-bottom:1px solid var(--rule);
+  will-change:transform;
+}
+.nav__mark{font-family:"Heebo",sans-serif;font-weight:900;letter-spacing:.28em;font-size:.9rem;padding-inline-start:.28em}
+.nav__links{display:flex;gap:var(--s6);justify-self:center}
+@media (max-width:1180px){ .nav__links{gap:var(--s5);font-size:.92rem} }
+.nav__cta{justify-self:start;display:flex;align-items:center;gap:.5rem}
+.nav__burger{display:none;justify-self:start;width:44px;height:44px;place-items:center}
+.nav__burger span{display:block;width:22px;height:2px;background:currentColor;transition:transform .3s var(--ease-out)}
+.nav__burger span+span{margin-top:5px}
+@media (max-width:991px){
+  .nav{grid-template-columns:auto 1fr auto}
+  .nav__links,.nav__cta{display:none}
+  .nav__burger{display:grid}
+}
+
+/* animated stacked link */
+.alink{position:relative;display:inline-block;overflow:hidden;vertical-align:top}
+.alink__in{display:block;transition:transform .3s var(--ease-out)}
+.alink__in span{display:block}
+.alink__in span+span{color:var(--signal)}
+@media (hover:hover){ .alink:hover .alink__in{transform:translateY(-50%)} }
+.alink::after{
+  content:"";position:absolute;bottom:0;right:0;height:1px;width:0;background:currentColor;
+  transition:width .5s var(--ease-out);
+}
+@media (hover:hover){ .alink:hover::after{width:100%} }
+
+/* ---------- mobile menu ---------- */
+.menu{
+  position:fixed;inset:0;z-index:850;background:var(--surface);
+  padding:5.5rem var(--s5) var(--s5);
+  display:flex;flex-direction:column;justify-content:space-between;
+  visibility:hidden;opacity:0;transition:opacity .4s var(--ease-out),visibility .4s;
+}
+.menu[data-open="true"]{visibility:visible;opacity:1}
+.menu__list{display:flex;flex-direction:column;margin:0;padding:0;list-style:none}
+.menu__list a{
+  display:block;padding-block:var(--s5);border-bottom:1px solid var(--rule);
+  font-family:"Frank Ruhl Libre",serif;font-weight:700;font-size:2.1rem;line-height:1;
+}
+.menu__close{position:absolute;top:1rem;left:var(--s5);width:44px;height:44px;font-weight:900}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--text);color:var(--surface);
+  padding:1.15rem 2rem;border-radius:999px;
+  font-weight:900;font-size:.95rem;letter-spacing:-.01em;
+  transition:transform .35s var(--ease-out),background .3s;
+}
+.btn--signal{background:var(--signal);color:var(--signal-text)}
+.btn--ghost{background:transparent;color:inherit;border:1px solid var(--rule-strong)}
+@media (hover:hover){ .btn:hover{transform:translateY(-2px)} }
+.btn:active{transform:scale(.985)}
+@media (max-width:767px){ .btn{width:100%;justify-content:space-between} }
+
+/* ---------- masked reveals ---------- */
+.mask{position:relative;overflow:hidden;display:block}
+.mask__c{position:absolute;inset:0;background:var(--surface);transform-origin:bottom center;z-index:2}
+.lines{display:block}
+.line{display:block;overflow:hidden}
+.line__i{display:block;will-change:transform}
+
+/* ---------- plates (print-block imagery) ---------- */
+.plate{
+  position:relative;overflow:hidden;background:var(--plate);
+  --dot:rgba(12,13,16,.9);
+  --form:var(--ink);
+  --cx:64%; --cy:34%; --cr:26%;
+  --rule-y:76%;
+}
+:root[data-theme="dark"] .plate{--dot:rgba(233,231,226,.85);--form:var(--paper)}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .plate{--dot:rgba(233,231,226,.85);--form:var(--paper)}
+}
+/* halftone field, fading across the plate */
+.plate::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background-image:radial-gradient(var(--dot) 1.6px, transparent 1.75px);
+  background-size:9px 9px;
+  -webkit-mask-image:linear-gradient(202deg, #000 6%, rgba(0,0,0,.28) 54%, transparent 84%);
+  mask-image:linear-gradient(202deg, #000 6%, rgba(0,0,0,.28) 54%, transparent 84%);
+}
+/* hard geometry: disc, hairline, signal chip */
+.plate::after{
+  content:"";position:absolute;inset:0;z-index:2;
+  background:
+    radial-gradient(circle at var(--cx) var(--cy), var(--form) 0 var(--cr), transparent calc(var(--cr) + .4%)),
+    linear-gradient(var(--signal), var(--signal)) 12% 84%/30px 30px no-repeat,
+    linear-gradient(var(--rule-strong), var(--rule-strong)) 0 var(--rule-y)/100% 1px no-repeat;
+}
+.plate--b{--form:var(--signal);--cx:32%;--cy:62%;--cr:31%;--rule-y:26%}
+.plate--b::after{
+  background:
+    radial-gradient(circle at var(--cx) var(--cy), var(--form) 0 var(--cr), transparent calc(var(--cr) + .4%)),
+    linear-gradient(var(--ink), var(--ink)) 78% 16%/24px 24px no-repeat,
+    linear-gradient(var(--rule-strong), var(--rule-strong)) 0 var(--rule-y)/100% 1px no-repeat;
+}
+.plate--tall{aspect-ratio:3/4;--cx:58%;--cy:30%;--cr:29%}
+.plate--sq{aspect-ratio:1/1;--cx:40%;--cy:44%;--cr:33%;--rule-y:82%}
+.plate--wide{aspect-ratio:4/3;--cx:70%;--cy:40%;--cr:24%;--rule-y:68%}
+.plate__tag{
+  position:absolute;bottom:.75rem;right:.75rem;z-index:3;
+  color:var(--paper);mix-blend-mode:difference;
+}
+</style>
+<style>
+
+/* ============================================================
+   WHO WE ARE
+   ============================================================ */
+.who{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s7);align-items:start}
+.who__kicker{grid-column:1/13;grid-row:1;display:flex;align-items:baseline;gap:var(--s4);flex-wrap:wrap}
+.who__mark{
+  grid-column:1/13;grid-row:2;margin:var(--s4) 0 0;direction:ltr;text-align:right;
+  font-family:"Frank Ruhl Libre",serif;font-weight:900;letter-spacing:-.02em;line-height:1.12;
+  font-size:clamp(1.7rem,4.6vw,3.4rem);
+}
+.who__mark .line:first-child .line__i{color:var(--text-soft);font-weight:300}
+.who__mark em{font-style:normal;color:var(--signal)}
+.who__plate{grid-column:1/5;grid-row:3;margin-top:var(--s10)}
+.who__body{grid-column:6/13;grid-row:3;margin-top:var(--s10);display:flex;flex-direction:column;gap:var(--s5)}
+.who__stmt{
+  grid-column:1/13;grid-row:4;margin:var(--s10) 0 0;direction:ltr;text-align:right;
+  font-family:"Frank Ruhl Libre",serif;font-weight:300;
+  font-size:clamp(1.7rem,4vw,3.1rem);line-height:1.14;letter-spacing:-.02em;
+}
+.who__stmt em{font-style:normal;font-weight:900;color:var(--signal)}
+.who__he{grid-column:6/13;grid-row:5;margin-top:var(--s9)}
+@media (max-width:991px){
+  .who__kicker,.who__mark,.who__plate,.who__body,.who__stmt,.who__he{grid-column:1/13;grid-row:auto}
+  .who__plate{margin-top:var(--s7);aspect-ratio:16/9}
+  .who__body{margin-top:var(--s7)}
+  .who__stmt{margin-top:var(--s9)}
+  .who__he{margin-top:var(--s7)}
+}
+
+/* ============================================================
+   FOR WHO WE ARE
+   ============================================================ */
+.aud{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s7);align-items:start}
+.aud__kicker{grid-column:1/13}
+.aud__h{
+  grid-column:1/13;margin:var(--s4) 0 0;direction:ltr;text-align:right;
+}
+.aud__h .line__i{
+  display:block;font-family:"Frank Ruhl Libre",serif;font-weight:900;
+  font-size:clamp(1.7rem,4.4vw,3.4rem);line-height:1.1;letter-spacing:-.03em;
+}
+.aud__h .line:nth-child(1) .line__i,.aud__h .line:nth-child(2) .line__i{color:var(--text-soft);font-weight:300}
+.aud__grid{
+  grid-column:1/13;margin-top:var(--s10);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--s7);
+  border-top:1px solid var(--rule);
+}
+.seg{
+  padding:var(--s7) 0 0;border-left:1px solid var(--rule);
+  padding-left:var(--s7);display:flex;flex-direction:column;gap:var(--s3);
+}
+.seg:last-child{border-left:0;padding-left:0}
+.seg__n{
+  display:block;direction:ltr;font-family:"Heebo",sans-serif;font-weight:900;
+  font-size:3.4rem;line-height:1;letter-spacing:-.02em;
+  color:transparent;-webkit-text-stroke:1.5px var(--rule-strong);
+}
+.seg__t{margin:var(--s3) 0 0;font-family:"Frank Ruhl Libre",serif;font-weight:700;font-size:1.5rem;line-height:1.08;direction:ltr;text-align:left}
+.seg__d{margin:0;color:var(--text-soft);font-size:.98rem;line-height:1.5;direction:ltr;text-align:left;max-width:30ch}
+.seg__tags{
+  margin:var(--s4) 0 0;padding-top:var(--s4);border-top:1px solid var(--rule);
+  color:var(--text-soft);font-weight:700;letter-spacing:.07em;line-height:1.8;
+  direction:ltr;text-align:left;
+}
+.aud__estd{
+  grid-column:1/13;margin-top:var(--s10);padding-top:var(--s5);border-top:1px solid var(--rule);
+  color:var(--text-soft);direction:ltr;text-align:left;
+}
+@media (max-width:991px){
+  .aud__grid{grid-template-columns:1fr;gap:var(--s9);border-top:0}
+  .seg{border-left:0;padding-left:0;padding-top:var(--s7);border-top:1px solid var(--rule)}
+  .aud__grid .seg:first-child{border-top:0}
+}
+</style>
+<style>
+/* ============================================================
+   HERO — full-bleed video wall, headline pinned to the bottom
+   ============================================================ */
+.hero{position:relative;overflow:hidden}
+.hero__stage{
+  position:relative;min-height:100vh;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.hero__wall{position:absolute;inset:0;display:flex;z-index:0}
+.hero__col{flex:1;position:relative;overflow:hidden}
+.hero__col-cover{position:absolute;inset:0;z-index:1;background:#0c0d10;transform-origin:bottom;transform:scaleY(0);will-change:transform}
+.hero__col video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:grayscale(1) contrast(1.12) brightness(.9);
+}
+.hero__scrim{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg, rgba(6,7,9,.68) 0%, rgba(6,7,9,.08) 26%, rgba(6,7,9,.14) 52%, rgba(6,7,9,.95) 100%);
+}
+.hero__topbar{
+  position:relative;z-index:3;padding-top:6.5rem;
+  display:flex;justify-content:space-between;align-items:baseline;gap:var(--s5);flex-wrap:wrap;
+}
+.hero__eyebrow{color:#f1f0ef}
+.hero__colophon{direction:ltr;text-align:left;color:rgba(241,240,239,.72);font-weight:700}
+.hero__bottom{position:relative;z-index:3;margin-top:auto;padding-bottom:var(--s7);direction:ltr}
+.hero__title{
+  margin:0;font-family:"Frank Ruhl Libre",serif;font-weight:900;
+  letter-spacing:-.02em;line-height:1.04;text-align:right;
+  font-size:clamp(2.3rem,7.2vw,6rem);color:#f1f0ef;
+}
+.hero__title .line:nth-child(1) .line__i,.hero__title .line:nth-child(2) .line__i{color:rgba(241,240,239,.62);font-weight:300}
+.hero__row{
+  margin-top:var(--s7);display:flex;justify-content:space-between;align-items:flex-end;
+  gap:var(--s6);flex-wrap:wrap;
+}
+.hero__lede{max-width:32ch;color:#f1f0ef}
+.hero__actions{display:flex;align-items:center;gap:var(--s5);flex-wrap:wrap}
+.hero__actions .btn--ghost{color:#f1f0ef;border-color:rgba(241,240,239,.55)}
+.hero__more{font-weight:700;font-size:.85rem;color:rgba(241,240,239,.72);border-bottom:1px solid rgba(241,240,239,.4);padding-bottom:.15em}
+.hero__foot{
+  margin-top:var(--s7);padding-top:var(--s5);border-top:1px solid rgba(241,240,239,.22);
+  display:flex;justify-content:space-between;align-items:baseline;gap:var(--s5);
+}
+.hero__foot span{font-weight:900;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(241,240,239,.72)}
+
+@media (max-width:991px){
+  .hero__col:nth-child(n+4){display:none}
+  .hero__title{font-size:clamp(1.9rem,6vw,3.4rem)}
+}
+@media (max-width:640px){
+  .hero__col:nth-child(n+3){display:none}
+  .hero__title{font-size:clamp(2rem,8.6vw,2.8rem)}
+  .hero__row{flex-direction:column;align-items:flex-start;gap:var(--s5)}
+}
+
+/* ============================================================
+   ABOUT US
+   ============================================================ */
+.about{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s7);align-items:start}
+.about__kicker{grid-column:1/13}
+.about__stmt{
+  grid-column:1/13;margin:var(--s4) 0 0;direction:ltr;text-align:right;
+  font-family:"Frank Ruhl Libre",serif;font-weight:900;letter-spacing:-.02em;line-height:1.1;
+  font-size:clamp(1.8rem,4.4vw,3.2rem);
+}
+.about__grid{grid-column:1/13;margin-top:var(--s9);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s6)}
+.about__img{margin:0;position:relative;overflow:hidden;aspect-ratio:3/4;background:var(--plate)}
+.about__img img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.05)}
+.about__cap{
+  position:absolute;inset:auto .6rem .6rem auto;z-index:2;margin:0;
+  color:var(--paper);mix-blend-mode:difference;
+  font-weight:900;font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;
+  direction:ltr;text-align:left;line-height:1.3;
+}
+@media (max-width:767px){
+  .about__grid{grid-template-columns:1fr;gap:var(--s5)}
+}
+
+/* ---------- ticker ---------- */
+.ticker{
+  border-block:1px solid var(--rule);
+  padding-block:1.1rem;overflow:hidden;position:relative;
+  background:var(--surface);
+}
+.ticker__track{display:flex;width:max-content;will-change:transform;direction:ltr}
+.ticker__item{
+  display:flex;align-items:center;gap:var(--s7);padding-inline:var(--s5);
+  font-family:"Frank Ruhl Libre",serif;font-weight:500;
+  font-size:clamp(1.1rem,2.2vw,1.9rem);white-space:nowrap;direction:rtl;
+}
+.ticker__dot{width:7px;height:7px;border-radius:50%;background:var(--signal);flex:none}
+
+/* ============================================================
+   FOUNDER
+   ============================================================ */
+.founder{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s7) var(--s7);align-items:start}
+.founder__kicker{grid-column:1/4}
+.founder__meta{grid-column:4/13;justify-self:end;direction:ltr;text-align:left;color:var(--text-soft)}
+.founder__h{grid-column:1/13;margin:var(--s4) 0 0}
+.founder__h .line__i{
+  font-family:"Frank Ruhl Libre",serif;font-weight:900;
+  font-size:clamp(2.4rem,7vw,5.6rem);line-height:.94;letter-spacing:-.02em;
+}
+.founder__plate{grid-column:1/5;grid-row:4;margin-top:var(--s9)}
+.founder__body{grid-column:6/11;grid-row:4;margin-top:var(--s9);display:flex;flex-direction:column;gap:var(--s5)}
+.founder__clients{grid-column:1/13;grid-row:5;margin-top:var(--s10);border-top:1px solid var(--rule);padding-top:var(--s6)}
+.founder__clients-list{
+  margin:0;direction:ltr;text-align:left;font-weight:700;
+  font-size:.95rem;letter-spacing:.01em;line-height:2;color:var(--text-soft);
+}
+@media (max-width:991px){
+  .founder__kicker,.founder__meta,.founder__h{grid-column:1/13}
+  .founder__meta{justify-self:start;text-align:right;margin-top:var(--s3)}
+  .founder__plate{grid-column:1/8;grid-row:auto;margin-top:var(--s7)}
+  .founder__body{grid-column:1/13;grid-row:auto;margin-top:var(--s7)}
+  .founder__clients{grid-row:auto;margin-top:var(--s9)}
+}
+
+/* ============================================================
+   OUR ARMS
+   ============================================================ */
+.arms{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s7);align-items:start}
+.arms__kicker{grid-column:1/13}
+.arms__stmt{
+  grid-column:1/13;margin:var(--s4) 0 0;direction:ltr;text-align:right;
+  font-family:"Frank Ruhl Libre",serif;font-weight:900;letter-spacing:-.02em;line-height:1.08;
+  font-size:clamp(2rem,5.6vw,4.2rem);
+}
+.arms__stmt .line:first-child .line__i{color:var(--text-soft);font-weight:300}
+.arms__rows{grid-column:1/13;margin-top:var(--s10);border-top:1px solid var(--rule)}
+.armrow{
+  display:grid;grid-template-columns:3.5rem 1fr auto;gap:var(--s6);
+  align-items:baseline;padding-block:var(--s5);border-bottom:1px solid var(--rule);
+}
+.armrow__n{
+  font-family:"Heebo",sans-serif;font-weight:900;font-size:1.3rem;
+  color:transparent;-webkit-text-stroke:1.2px var(--rule-strong);
+  direction:ltr;
+}
+.armrow__t{
+  margin:0;font-family:"Frank Ruhl Libre",serif;font-weight:700;
+  font-size:clamp(1.15rem,2.3vw,1.55rem);line-height:1.05;direction:ltr;text-align:left;
+}
+.armrow__tag{
+  margin:0;color:var(--text-soft);font-weight:900;font-size:.68rem;
+  letter-spacing:.11em;text-transform:uppercase;white-space:nowrap;
+}
+@media (max-width:767px){
+  .armrow{grid-template-columns:2.5rem 1fr;gap:.3rem .75rem}
+  .armrow__tag{grid-column:2/3;white-space:normal}
+}
+
+/* ============================================================
+   OUR PHILOSOPHY
+   ============================================================ */
+.phil{max-width:52rem}
+.phil__kicker{margin:0 0 var(--s6)}
+.phil__stmt{
+  margin:0;direction:ltr;text-align:right;
+  font-family:"Frank Ruhl Libre",serif;font-weight:900;letter-spacing:-.02em;line-height:1.06;
+  font-size:clamp(2.2rem,6.2vw,4.4rem);
+}
+.phil__stmt em{font-style:normal;color:var(--signal)}
+.phil__body{margin-top:var(--s8);display:flex;flex-direction:column;gap:var(--s5);text-align:left}
+.phil__cta{
+  display:inline-flex;align-items:center;gap:.45rem;
+  margin-top:var(--s7);color:var(--signal);
+}
+
+/* ============================================================
+   JOIN + FOOTER
+   ============================================================ */
+.join{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s7);align-items:end}
+.join__h{grid-column:1/9}
+.join__side{grid-column:10/13;display:flex;flex-direction:column;gap:var(--s4)}
+.join__rows{grid-column:1/13;margin-top:var(--s10)}
+.jrow{
+  display:grid;grid-template-columns:14rem 1fr auto;gap:var(--s7);
+  align-items:baseline;padding-block:var(--s5);border-top:1px solid var(--rule);
+}
+.jrow:last-child{border-bottom:1px solid var(--rule)}
+.jrow__k{color:var(--text-soft);font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;font-weight:900}
+.jrow__v{font-family:"Frank Ruhl Libre",serif;font-size:1.35rem;font-weight:500}
+@media (max-width:991px){
+  .join__h,.join__side,.join__rows{grid-column:1/13}
+  .jrow{grid-template-columns:1fr;gap:.4rem}
+}
+.endmark{
+  margin-top:var(--s10);overflow:hidden;line-height:.74;
+  border-top:1px solid var(--rule);padding-top:var(--s5);
+}
+.endmark span{
+  display:block;direction:ltr;text-align:center;white-space:nowrap;
+  font-family:"Heebo",sans-serif;font-weight:900;font-size:23vw;letter-spacing:-.055em;
+  margin-bottom:-.12em;
+}
+.colophon{
+  display:flex;justify-content:space-between;gap:var(--s5);flex-wrap:wrap;
+  padding-block:var(--s5);color:var(--text-soft);font-size:.8rem;
+}
+
+/* ============================================================
+   ONE HOME 4 PEOPLE — scroll-lit manifesto
+   ============================================================ */
+.home4{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s7);align-items:start}
+.home4__label{grid-column:1/5}
+.home4__where{grid-column:11/13;justify-self:end;text-align:left;color:var(--text-soft)}
+.home4__mark{
+  grid-column:1/13;margin:var(--s5) 0 0;direction:ltr;text-align:right;
+  font-family:"Frank Ruhl Libre",serif;font-weight:900;letter-spacing:-.02em;line-height:.98;
+  font-size:clamp(2rem,6.6vw,5.6rem);
+}
+.home4__mark em{font-style:normal;font-weight:300}
+.home4__lead{grid-column:1/13;margin:var(--s3) 0 var(--s10)}
+.home4__col{grid-column:1/8;display:flex;flex-direction:column;gap:var(--s7)}
+.home4__col--b{grid-column:6/13;margin-top:var(--s10)}
+.home4__cut{
+  grid-column:1/13;margin-block:var(--s10);
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding-block:var(--s7);
+  display:flex;flex-direction:column;gap:.15em;
+}
+.home4__cut p{
+  margin:0;font-family:"Frank Ruhl Libre",serif;font-weight:900;
+  font-size:clamp(1.9rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.035em;
+}
+.home4__cut p:nth-child(1),.home4__cut p:nth-child(2){color:var(--text-soft);font-weight:300}
+.home4__cut p:last-child{color:var(--signal)}
+.home4__cut span[dir="ltr"]{display:inline-block}
+.home4__after{grid-column:1/9;font-family:"Frank Ruhl Libre",serif;font-weight:500;font-size:clamp(1.2rem,2.4vw,1.9rem);line-height:1.3;margin:0}
+.home4__tags{grid-column:1/13;margin-top:var(--s9);padding-top:var(--s6);border-top:1px solid var(--rule);color:var(--text-soft);text-align:left}
+@media (max-width:991px){
+  .home4__label,.home4__where,.home4__col,.home4__col--b,.home4__after{grid-column:1/13}
+  .home4__where{justify-self:start;text-align:right}
+  .home4__col--b{margin-top:0}
+  .home4__lead{margin-bottom:var(--s9)}
+}
+
+/* word-by-word scroll reveal */
+.magic{
+  display:flex;flex-wrap:wrap;gap:0 .26em;margin:0;
+  font-family:"Frank Ruhl Libre",serif;font-weight:500;
+  font-size:clamp(1.25rem,2.3vw,1.85rem);
+  line-height:1.34;letter-spacing:-.025em;
+  max-width:34ch;
+}
+.magic--wide{max-width:44ch}
+.magic__w{display:inline-block;will-change:opacity}
+@media (max-width:767px){ .magic{font-size:1.35rem;max-width:none} }
+
+/* ============================================================
+   TEMPLATE SYSTEM — kicker / meta-line / callout (shared)
+   ============================================================ */
+.tplmeta{color:var(--text-soft) !important}
+
+.callout{
+  border-inline-start:2px solid var(--rule-strong);
+  padding-inline-start:var(--s5);
+  font-size:1.05rem;line-height:1.55;color:var(--text-soft);
+  max-width:42ch;margin:0;
+}
+
+/* ============================================================
+   REEL — video filmstrip (motion strip beneath the hero)
+   ============================================================ */
+.reel{border-block:1px solid var(--rule);padding-block:var(--s6);overflow:hidden;background:var(--surface)}
+.reel__track{display:flex;width:max-content;gap:var(--s5);will-change:transform;direction:ltr}
+.reel__tile{
+  position:relative;flex:none;width:clamp(8.5rem,15vw,12.5rem);aspect-ratio:9/16;
+  overflow:hidden;background:var(--plate);
+}
+.reel__tile video{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:grayscale(1) contrast(1.05);transition:filter .7s var(--ease-out);
+}
+@media (hover:hover){ .reel__tile:hover video{filter:grayscale(0) contrast(1.05) saturate(1.15)} }
+.reel__cap{
+  position:absolute;inset:auto .6rem .6rem auto;z-index:2;
+  color:var(--paper);mix-blend-mode:difference;
+  font-weight:900;font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;
+  direction:ltr;text-align:left;line-height:1.3;
+}
+
+/* ============================================================
+   WHAT IS YOUR COLOR
+   ============================================================ */
+.clrs{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s7);align-items:start}
+.clrs__meta{grid-column:1/13;direction:ltr;text-align:left}
+.clrs__kicker{grid-column:1/13;margin-top:var(--s9);direction:ltr;text-align:right}
+.clrs__tags{
+  grid-column:1/13;margin:var(--s3) 0 0;direction:ltr;text-align:right;
+  font-family:"Frank Ruhl Libre",serif;font-weight:900;
+  letter-spacing:-.015em;line-height:1.1;
+  font-size:clamp(1.7rem,4.6vw,3.3rem);
+}
+.clrs__note{grid-column:1/8;margin-top:var(--s9)}
+.clrs__cta{grid-column:1/8;margin-top:var(--s6);display:inline-flex;align-items:center;gap:.45rem;color:var(--signal);width:fit-content}
+@media (max-width:991px){
+  .clrs__note{grid-column:1/13}
+  .clrs__tags{font-size:clamp(1.5rem,6.4vw,2.5rem)}
+}
+
+/* ============================================================
+   UPCOMING
+   ============================================================ */
+.up{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s7);align-items:start}
+.up__meta{grid-column:1/13;direction:ltr;text-align:left}
+.up__kicker{grid-column:1/13;margin-top:var(--s9);direction:ltr;text-align:right}
+.up__num{
+  grid-column:1/13;margin:var(--s3) 0 0;direction:ltr;text-align:right;
+  font-family:"Heebo",sans-serif;font-weight:900;letter-spacing:-.03em;line-height:.86;
+  font-size:clamp(3.6rem,13vw,8.6rem);
+}
+.up__rows{grid-column:1/13;margin-top:var(--s9);border-top:1px solid var(--rule)}
+.uprow{
+  display:grid;grid-template-columns:11rem 1fr 1.3fr;gap:var(--s7);
+  align-items:baseline;padding-block:var(--s6);border-bottom:1px solid var(--rule);
+  direction:ltr;text-align:left;
+}
+.uprow__meta{color:var(--text-soft);font-weight:900;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+.uprow__t{
+  margin:0;font-family:"Frank Ruhl Libre",serif;font-weight:900;
+  font-size:clamp(1.3rem,2.6vw,1.95rem);line-height:1.15;letter-spacing:-.01em;
+}
+.uprow__t i{font-style:normal;font-weight:300;color:var(--text-soft);display:block}
+.uprow__d{margin:0;color:var(--text-soft);font-size:.98rem;line-height:1.55;max-width:44ch}
+@media (max-width:991px){
+  .uprow{grid-template-columns:1fr;gap:.5rem}
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .app *,.app *::before,.app *::after{
+    animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+  .loader{display:none}
+  .mask__c{display:none}
+  .ticker__track{transform:none !important}
+  .reel__track{transform:none !important}
+}
+</style>
+</head>
+<body>
+<div class="app" lang="he" dir="rtl">
+
+  <!-- grain -->
+  <svg class="grain" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <filter id="grainf"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="100%" height="100%" filter="url(#grainf)" opacity="0.5"/>
+  </svg>
+  <div class="cursor" aria-hidden="true"></div>
+
+  <!-- loader -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__mark">PEOPLE</div>
+    <div class="loader__bar" id="loaderBar"></div>
+  </div>
+
+  <!-- nav -->
+  <header class="nav" id="nav">
+    <a class="nav__mark" href="#top" aria-label="PEOPLE, לראש העמוד">PEOPLE</a>
+    <nav class="nav__links" aria-label="ראשי">
+      <a class="alink" href="#who"><span class="alink__in"><span>אודות</span><span>אודות</span></span></a>
+      <a class="alink" href="#space"><span class="alink__in"><span>המרחב</span><span>המרחב</span></span></a>
+      <a class="alink" href="#arms"><span class="alink__in"><span>הזרועות</span><span>הזרועות</span></span></a>
+      <a class="alink" href="#founder"><span class="alink__in"><span>המייסדת</span><span>המייסדת</span></span></a>
+      <a class="alink" href="#upcoming"><span class="alink__in"><span>אירועים</span><span>אירועים</span></span></a>
+    </nav>
+    <div class="nav__cta">
+      <a class="alink label" href="#join"><span class="alink__in"><span>הצטרפות +</span><span>הצטרפות +</span></span></a>
+    </div>
+    <button class="nav__burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="פתיחת תפריט">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- mobile menu -->
+  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="תפריט" data-open="false">
+    <button class="menu__close" id="menuClose" aria-label="סגירת תפריט">✕</button>
+    <ul class="menu__list">
+      <li><a href="#who">אודות</a></li>
+      <li><a href="#space">המרחב</a></li>
+      <li><a href="#arms">הזרועות</a></li>
+      <li><a href="#founder">המייסדת</a></li>
+      <li><a href="#upcoming">אירועים</a></li>
+    </ul>
+    <a class="btn btn--signal" href="#join">הצטרפות לקהילה <span aria-hidden="true">+</span></a>
+  </div>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero__stage" id="heroStage">
+        <div class="hero__wall" id="heroWall">
+          <div class="hero__col"><video src="media/reel/reel-1.mp4" poster="media/reel/reel-1.jpg" muted loop playsinline preload="auto"></video><div class="hero__col-cover"></div></div>
+          <div class="hero__col"><video src="media/reel/reel-2.mp4" poster="media/reel/reel-2.jpg" muted loop playsinline preload="auto"></video><div class="hero__col-cover"></div></div>
+          <div class="hero__col"><video src="media/reel/reel-3.mp4" poster="media/reel/reel-3.jpg" muted loop playsinline preload="auto"></video><div class="hero__col-cover"></div></div>
+          <div class="hero__col"><video src="media/reel/reel-4.mp4" poster="media/reel/reel-4.jpg" muted loop playsinline preload="auto"></video><div class="hero__col-cover"></div></div>
+          <div class="hero__col"><video src="media/reel/reel-1.mp4" poster="media/reel/reel-1.jpg" muted loop playsinline preload="auto"></video><div class="hero__col-cover"></div></div>
+        </div>
+        <div class="hero__scrim" aria-hidden="true"></div>
+
+        <div class="hero__topbar gutter">
+          <p class="label hero__eyebrow" dir="ltr">Culture &times; Identity</p>
+          <p class="label hero__colophon tplmeta" dir="ltr">Creative Community 4 People &middot; ZipiRomanoGroup &middot; Est. 2005 &middot; Tel Aviv</p>
+        </div>
+
+        <div class="hero__bottom gutter">
+          <h1 class="hero__title lines">
+            <span class="line"><span class="line__i">Not another studio.</span></span>
+            <span class="line"><span class="line__i">Not another course.</span></span>
+            <span class="line"><span class="line__i">The future home for creators.</span></span>
+            <span class="line"><span class="line__i">Culture meets identity.</span></span>
+          </h1>
+
+          <div class="hero__row">
+            <p class="body hero__lede">Courses, gatherings, and a community built around who you are &mdash; not just what you make.</p>
+            <div class="hero__actions">
+              <a class="btn btn--ghost" href="#join">join our community <span aria-hidden="true">+</span></a>
+              <a class="hero__more" href="#arms">See what we offer</a>
+            </div>
+          </div>
+
+          <div class="hero__foot">
+            <span dir="ltr">Estd &times; 2026 &copy;</span>
+            <span dir="ltr">001 / 013</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT US ============ -->
+    <section class="sec gutter" id="about">
+      <div class="about">
+        <p class="label about__kicker" dir="ltr">About Us</p>
+        <p class="about__stmt" dir="ltr">A community for the creators of a new culture.</p>
+
+        <div class="about__grid">
+          <figure class="about__img">
+            <div class="mask" style="height:100%">
+              <img src="media/about/about-1.jpg" alt="" loading="lazy">
+              <div class="mask__c" data-mask></div>
+            </div>
+            <figcaption class="about__cap">P&Eacute;OPLE<br>Highlight Reel</figcaption>
+          </figure>
+          <figure class="about__img">
+            <div class="mask" style="height:100%">
+              <img src="media/about/about-4.jpg" alt="" loading="lazy">
+              <div class="mask__c" data-mask></div>
+            </div>
+            <figcaption class="about__cap">P&Eacute;OPLE<br>Dinner Show</figcaption>
+          </figure>
+          <figure class="about__img">
+            <div class="mask" style="height:100%">
+              <img src="media/about/about-2.jpg" alt="" loading="lazy">
+              <div class="mask__c" data-mask></div>
+            </div>
+            <figcaption class="about__cap">P&Eacute;OPLE<br>Dinner Show</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TICKER ============ -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track" id="ticker">
+        <div class="ticker__item">
+          <span>Creative Community</span><span class="ticker__dot"></span>
+          <span>Creator&rsquo;s Academy</span><span class="ticker__dot"></span>
+          <span>Work Space</span><span class="ticker__dot"></span>
+          <span>Events</span><span class="ticker__dot"></span>
+          <span>Studio</span><span class="ticker__dot"></span>
+          <span>Store</span><span class="ticker__dot"></span>
+          <span>Marketplace</span><span class="ticker__dot"></span>
+          <span>Moments Card</span><span class="ticker__dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ WHO WE ARE ============ -->
+    <section class="sec gutter" id="who">
+      <div class="who">
+        <div class="who__kicker">
+          <p class="label" dir="ltr">Who we are</p>
+          <p class="serif" style="color:var(--text-soft);font-size:1rem">מי אנחנו</p>
+        </div>
+
+        <h2 class="who__mark lines" dir="ltr">
+          <span class="line"><span class="line__i">Not a studio. Not a school.</span></span>
+          <span class="line"><span class="line__i">A creative community of <em>P&eacute;ople</em>.</span></span>
+        </h2>
+
+        <div class="who__plate">
+          <div class="mask">
+            <div class="plate plate--tall" style="--cx:44%;--cy:36%;--cr:27%">
+              <span class="plate__tag label" dir="ltr">People 4 People</span>
+            </div>
+            <div class="mask__c" data-mask></div>
+          </div>
+        </div>
+
+        <div class="who__body" data-reveal dir="ltr">
+          <p class="body">A community for the creators of a new culture — one that honors the free human being&rsquo;s right to be authentic and unique, exactly as they were born to be. Built on a genuine desire to do good for creation, generating a unified human flow that enables value&#8209;driven growth within a safe space.</p>
+          <p class="body body--soft">Our values are rooted in a love of people, an acceptance of difference, and the understanding that every person can play a meaningful role in another&rsquo;s life. The goal is a space where every person sheds the old shell, and connects to a new world that celebrates what makes them singular. Only from that place will they feel valued, fulfilled, and able to contribute to themselves and to the community.</p>
+        </div>
+
+        <p class="who__stmt lines"><span class="line"><span class="line__i">We are the &mdash; <em>People 4 People.</em></span></span></p>
+
+        <p class="magic magic--wide who__he">קהילה יצירתית שנולדה מתוך אמונה שכל אדם נושא בתוכו צבע ייחודי. זהות, כישרון, ואנרגיה שאי אפשר לחקות. הקהילה נועדה לגלות, לפתח ולחגוג את הזהות האמיתית של כל אדם ואת אזור הגאונות שלו.</p>
+      </div>
+    </section>
+
+    <!-- ============ FOR WHO WE ARE ============ -->
+    <section class="sec gutter" id="audience">
+      <div class="aud">
+        <p class="label aud__kicker" dir="ltr">For who we are</p>
+
+        <h2 class="aud__h lines">
+          <span class="line"><span class="line__i">Not another community.</span></span>
+          <span class="line"><span class="line__i">Not forced networking.</span></span>
+          <span class="line"><span class="line__i">A living space for Creators &mdash; where connection,</span></span>
+          <span class="line"><span class="line__i">culture, knowledge, growth and livelihood meet.</span></span>
+        </h2>
+
+        <div class="aud__grid">
+          <div class="seg">
+            <span class="seg__n">01</span>
+            <h3 class="seg__t">Creators &amp; Artists</h3>
+            <p class="seg__d">Influencers, digital creators, photographers, designers, artists, musicians &mdash; anyone who creates and wants a community that truly understands them.</p>
+            <p class="seg__tags label">Music Artist &middot; Director &middot; Producer &middot; Video Artist &middot; Social Media Director &middot; Photographer &middot; DJ &middot; Dancer &middot; Chef</p>
+          </div>
+          <div class="seg">
+            <span class="seg__n">02</span>
+            <h3 class="seg__t">Those Finding Themselves</h3>
+            <p class="seg__d">Anyone who knows they carry something special inside, and wants a safe and honest space to discover exactly what it is.</p>
+            <p class="seg__tags label">Event Maker &middot; Producer &middot; Student &middot; Art Director &middot; Writer &middot; Career Shifter</p>
+          </div>
+          <div class="seg">
+            <span class="seg__n">03</span>
+            <h3 class="seg__t">Entrepreneurs &amp; Brands</h3>
+            <p class="seg__d">Business people who understand that personal identity is their most powerful and enduring asset.</p>
+            <p class="seg__tags label">High-Tech Companies &middot; Fashion Brands &middot; Cultural &amp; Creative Projects &middot; Brand Launches &middot; Strategic Marketing &middot; Lifestyle Brands</p>
+          </div>
+        </div>
+
+        <p class="aud__estd label">Estd &times; 2026 <span aria-hidden="true">&copy;</span></p>
+      </div>
+    </section>
+
+    <!-- ============ OUR PHILOSOPHY ============ -->
+    <section class="sec gutter" id="philosophy">
+      <div class="phil">
+        <p class="label phil__kicker" dir="ltr">Our Philosophy</p>
+
+        <p class="phil__stmt lines" dir="ltr"><span class="line"><span class="line__i">You are the only <em>you</em>.</span></span></p>
+
+        <div class="phil__body" data-reveal dir="ltr">
+          <p class="body">A philosophy that celebrates the distinction between one person and another. Years of research into the individual &mdash; in both the physical and the psychic space &mdash; show that no two people are alike, to a striking degree.</p>
+          <p class="body body--soft">Every person has their own area of genius: a calling, a purpose, a craft. PÉOPLE exists to help you identify that inner genius, and to live it out fully.</p>
+        </div>
+
+        <a class="phil__cta label" href="#join" dir="ltr">Discover your identity <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </section>
+
+    <!-- ============ WHAT IS YOUR COLOR ============ -->
+    <section class="sec gutter" id="color">
+      <div class="clrs">
+        <p class="label clrs__meta tplmeta" dir="ltr">Creative Community 4 People &middot; ZipiRomanoGroup &middot; Est. 2005 &middot; Tel Aviv</p>
+        <p class="label clrs__kicker" dir="ltr">What is your color</p>
+
+        <h2 class="clrs__tags lines">
+          <span class="line"><span class="line__i">Art &middot; Balance &middot; Philosophy &middot; Digital Music &middot; Longevity &middot; Food &middot; Wellness &middot; Humanity and Earth &middot; Fashion &middot; Technology &middot; Books &middot; Sport &middot; Free Adulation &middot; Time Balance</span></span>
+        </h2>
+
+        <blockquote class="callout clrs__note" dir="ltr">Every person is a unique combination of energy, emotion, thought and behavior, and that combination has a color.</blockquote>
+
+        <a class="hero__more clrs__cta" href="#join" dir="ltr">Take the color quiz <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </section>
+
+    <!-- ============ THE SPACE ============ -->
+    <section class="sec gutter" id="space">
+      <div class="home4">
+        <p class="label home4__label">המרחב</p>
+        <p class="label home4__where">חלל אירוח<br>תל אביב</p>
+
+        <h2 class="home4__mark" dir="ltr">FINE HOUSE 4 <em>PEOPLE</em></h2>
+        <p class="display d3 home4__lead lines"><span class="line"><span class="line__i">המרחב שבו הכל מתחבר.</span></span></p>
+
+        <div class="home4__col">
+          <p class="magic magic--wide">חלל אירוח ועבודה פיזי וייחודי למפגשי קהילה, תרבות, תוכן וקולינריה, מהרצאות ותערוכות, דרך אופנה ומוזיקה, ועד פופ־אפים ומסיבות.</p>
+          <p class="body body--soft" dir="ltr">The space where everything connects. A unique physical hosting space &mdash; home to community gatherings, social events, culture evenings, lecture workshops, art exhibitions, design, culinary workshops, fashion meetings, music, parties, pop&#8209;ups and more.</p>
+        </div>
+
+        <div class="home4__col home4__col--b">
+          <p class="magic">בית לחקירה, השראה ושיח עמוק שמעורר מחשבה על זהות וביטוי אישי.</p>
+          <p class="magic">תוכלו להגיע לבית שלנו לעבוד, ללמוד, לקבל השראה, להתקרב, להקליט, לארח, לצלם — חלל פתוח שמשתנה לפי הצורך של יוצרי הקהילה.</p>
+          <p class="body body--soft" dir="ltr">A space of inquiry, conversation and inspiration &mdash; intentionally sparking thought about identity, meaning and personal expression.</p>
+        </div>
+
+        <div class="home4__cut">
+          <p>לא עוד קהילה.</p>
+          <p>לא נטוורקינג מאולץ.</p>
+          <p>אלא מרחב חי ל־<span dir="ltr">Creators</span></p>
+        </div>
+
+        <p class="home4__after">שבו קשרים, תרבות, ידע, התפתחות ופרנסה נפגשים.</p>
+
+        <p class="label home4__tags" dir="ltr">Work Space &middot; Workshops &middot; Academy &middot; Events &middot; Food &middot; Podcast Room &middot; Photoshoot Space &middot; Fashion Pop&#8209;Up</p>
+      </div>
+    </section>
+
+    <!-- ============ OUR ARMS ============ -->
+    <section class="sec gutter" id="arms">
+      <div class="arms">
+        <p class="label arms__kicker" dir="ltr">Our Arms</p>
+        <p class="arms__stmt lines" dir="ltr"><span class="line"><span class="line__i">All you need.</span></span><span class="line"><span class="line__i">One place.</span></span></p>
+
+        <div class="arms__rows">
+          <div class="armrow">
+            <span class="armrow__n">01</span>
+            <h3 class="armrow__t">Creative People Community</h3>
+            <p class="armrow__tag" dir="ltr">The heart of People</p>
+          </div>
+          <div class="armrow">
+            <span class="armrow__n">02</span>
+            <h3 class="armrow__t">People Creator&rsquo;s Academy</h3>
+            <p class="armrow__tag" dir="ltr">Learn. Grow. Create.</p>
+          </div>
+          <div class="armrow">
+            <span class="armrow__n">03</span>
+            <h3 class="armrow__t">People Work Space</h3>
+            <p class="armrow__tag" dir="ltr">Where ideas come to life</p>
+          </div>
+          <div class="armrow">
+            <span class="armrow__n">04</span>
+            <h3 class="armrow__t">People Events</h3>
+            <p class="armrow__tag" dir="ltr">Culture meets identity</p>
+          </div>
+          <div class="armrow">
+            <span class="armrow__n">05</span>
+            <h3 class="armrow__t">People Studio</h3>
+            <p class="armrow__tag" dir="ltr">Creative studio for identity</p>
+          </div>
+          <div class="armrow">
+            <span class="armrow__n">06</span>
+            <h3 class="armrow__t">People Store</h3>
+            <p class="armrow__tag" dir="ltr">Wear your identity</p>
+          </div>
+          <div class="armrow">
+            <span class="armrow__n">07</span>
+            <h3 class="armrow__t">People Marketplace</h3>
+            <p class="armrow__tag" dir="ltr">An incubator for development &amp; sales</p>
+          </div>
+          <div class="armrow">
+            <span class="armrow__n">08</span>
+            <h3 class="armrow__t">People Moments Card</h3>
+            <p class="armrow__tag" dir="ltr">The creators&rsquo; consumer club</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOUNDER ============ -->
+    <section class="sec gutter" id="founder">
+      <div class="founder">
+        <p class="label founder__kicker" dir="ltr">Founder</p>
+        <p class="label founder__meta tplmeta" dir="ltr">ZipiRomanoGroup &middot; 2005 &middot; Tel Aviv</p>
+
+        <h2 class="founder__h lines" dir="ltr"><span class="line"><span class="line__i">Romano.</span></span></h2>
+
+        <div class="founder__plate">
+          <div class="mask">
+            <div class="plate plate--tall"><span class="plate__tag label" dir="ltr">Zipi Romano</span></div>
+            <div class="mask__c" data-mask></div>
+          </div>
+        </div>
+
+        <div class="founder__body" data-reveal dir="ltr">
+          <p class="body">An entrepreneur, cultural brand architect, and creative strategist. In 2005, she founded a branding, strategy, and public relations studio that has worked with some of the most influential lifestyle, fashion, and beauty brands in Israel and internationally.</p>
+          <p class="body body--soft">Driven by the belief that authentic branding begins from within, she developed a methodology that helps individuals and organizations discover their core identity and translate it into visual language, narrative, and cultural presence.</p>
+          <p class="body body--soft">She is also the founder of PÉOPLE &mdash; a creative community and cultural platform connecting creators, entrepreneurs, and thinkers, building new bridges between identity, culture, and opportunity.</p>
+        </div>
+
+        <div class="founder__clients">
+          <p class="label" style="color:var(--text-soft);margin-bottom:var(--s3)" dir="ltr">Selected clients</p>
+          <p class="founder__clients-list" dir="ltr">Reebok &middot; Victoria Beckham &middot; Toni &amp; Guy &middot; Schwarzkopf &middot; Adika &middot; Golf &amp; Co &middot; Bank Hapoalim &middot; Ann Demeulemeester &middot; Rolex &middot; Adidas &middot; MAC &middot; Fashion Weeks &middot; Tom Ford &middot; Jo Malone &middot; Sisley &middot; Carolina Herrera &middot; Dior</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============ UPCOMING ============ -->
+    <section class="sec gutter" id="upcoming">
+      <div class="up">
+        <p class="label up__meta tplmeta" dir="ltr">Creative Community 4 People &middot; ZipiRomanoGroup &middot; Est. 2005 &middot; Tel Aviv</p>
+        <p class="label up__kicker" dir="ltr">Upcoming</p>
+
+        <p class="up__num">2026</p>
+
+        <div class="up__rows">
+          <div class="uprow uprow--soon">
+            <p class="uprow__meta">Calendar &middot; In the works</p>
+            <h3 class="uprow__t">The first PÉOPLE<i>calendar is taking shape</i></h3>
+            <p class="uprow__d">Gatherings, workshops and open studio days &mdash; announced here first. Join the community to hear about them before anyone else.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REEL ============ -->
+    <section class="reel" aria-label="קטעים מאירועי הקהילה">
+      <div class="reel__track" id="reel">
+        <div class="reel__tile" data-mask>
+          <video src="media/reel/reel-2.mp4" poster="media/reel/reel-2.jpg" autoplay muted loop playsinline preload="none"></video>
+          <span class="reel__cap">People<br>Highlight Reel</span>
+        </div>
+        <div class="reel__tile" data-mask>
+          <video src="media/reel/reel-3.mp4" poster="media/reel/reel-3.jpg" autoplay muted loop playsinline preload="none"></video>
+          <span class="reel__cap">People<br>Dinner Show</span>
+        </div>
+        <div class="reel__tile" data-mask>
+          <video src="media/reel/reel-1.mp4" poster="media/reel/reel-1.jpg" autoplay muted loop playsinline preload="none"></video>
+          <span class="reel__cap">People<br>Highlight Reel</span>
+        </div>
+        <div class="reel__tile" data-mask>
+          <video src="media/reel/reel-4.mp4" poster="media/reel/reel-4.jpg" autoplay muted loop playsinline preload="none"></video>
+          <span class="reel__cap">People<br>Dinner Show</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ JOIN ============ -->
+    <section class="sec gutter" id="join">
+      <div class="join">
+        <h2 class="display d1 join__h lines" dir="ltr" style="text-align:right">
+          <span class="line"><span class="line__i">Ready to become</span></span>
+          <span class="line"><span class="line__i">your one?</span></span>
+        </h2>
+        <div class="join__side" dir="ltr">
+          <p class="body">Join a community of people who chose to live their identity. Events, content, connections, and space to grow.</p>
+          <div class="hero__actions" style="justify-content:flex-start">
+            <a class="btn btn--signal" href="mailto:people@zipiromanogroup.co.il?subject=Joining%20PEOPLE">Join the community <span aria-hidden="true">+</span></a>
+            <a class="hero__more" href="#color">What&rsquo;s your color?</a>
+          </div>
+        </div>
+
+        <div class="join__rows">
+          <div class="jrow">
+            <span class="jrow__k">Email</span>
+            <span class="jrow__v" dir="ltr">people@zipiromanogroup.co.il</span>
+            <a class="alink label" href="mailto:people@zipiromanogroup.co.il"><span class="alink__in"><span>כתיבה</span><span>כתיבה</span></span></a>
+          </div>
+          <div class="jrow">
+            <span class="jrow__k">Website</span>
+            <span class="jrow__v" dir="ltr">peoplecommunity.co.il</span>
+            <a class="alink label" href="#top"><span class="alink__in"><span>לראש העמוד</span><span>לראש העמוד</span></span></a>
+          </div>
+          <div class="jrow">
+            <span class="jrow__k">Location</span>
+            <span class="jrow__v" dir="ltr">32&deg;05&prime;N, 34&deg;47&prime;E &mdash; Tel Aviv</span>
+            <a class="alink label" href="#space"><span class="alink__in"><span>המרחב</span><span>המרחב</span></span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="endmark" aria-hidden="true"><span>P&Eacute;OPLE</span></div>
+      <div class="colophon">
+        <span dir="ltr">&copy; PÉOPLE &mdash; by ZipiRomano &middot; All rights reserved</span>
+        <span dir="ltr">Tel Aviv &middot; 2026</span>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var $  = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var hasGSAP = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
+
+  /* ---------- menu (always available) ---------- */
+  var menu = $("#menu"), burger = $("#burger"), menuClose = $("#menuClose");
+  function setMenu(open) {
+    menu.setAttribute("data-open", String(open));
+    burger.setAttribute("aria-expanded", String(open));
+    document.documentElement.style.overflow = open ? "hidden" : "";
+    if (open) { menuClose.focus(); } else { burger.focus(); }
+  }
+  burger.addEventListener("click", function () { setMenu(menu.getAttribute("data-open") !== "true"); });
+  menuClose.addEventListener("click", function () { setMenu(false); });
+  $$("#menu a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && menu.getAttribute("data-open") === "true") { setMenu(false); }
+  });
+
+  if (reduced || !hasGSAP) {
+    var l = $("#loader"); if (l) { l.remove(); }
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- smooth scroll ---------- */
+  if (typeof window.Lenis !== "undefined") {
+    var lenis = new Lenis({ duration: 1.2, smoothWheel: true, lerp: 0.1 });
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+    gsap.ticker.lagSmoothing(0);
+    $$('a[href^="#"]').forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        var target = document.querySelector(a.getAttribute("href"));
+        if (!target) { return; }
+        e.preventDefault();
+        lenis.scrollTo(target, { offset: -60 });
+      });
+    });
+  }
+
+  /* ---------- custom cursor ---------- */
+  var cursor = $(".cursor");
+  if (window.matchMedia("(hover:hover) and (pointer:fine)").matches) {
+    var cx = gsap.quickTo(cursor, "x", { duration: 0.35, ease: "power3" });
+    var cy = gsap.quickTo(cursor, "y", { duration: 0.35, ease: "power3" });
+    window.addEventListener("pointermove", function (e) { cx(e.clientX); cy(e.clientY); });
+    $$("a, button").forEach(function (el) {
+      el.addEventListener("pointerenter", function () { gsap.to(cursor, { scale: 3.1, duration: 0.35, ease: "expo.out", overwrite: true }); });
+      el.addEventListener("pointerleave", function () { gsap.to(cursor, { scale: 1, duration: 0.3, ease: "expo.out", overwrite: true }); });
+    });
+  }
+
+  /* ---------- opening sequence ---------- */
+  var heroLines = $$("#hero .line__i");
+  var heroCovers = $$("#hero .hero__col-cover");
+  var heroVideos = $$("#hero .hero__col video");
+  heroVideos.forEach(function (v) {
+    v.playbackRate = 1.6;
+    v.play && v.play().catch(function () {});
+  });
+  gsap.set(heroCovers, { scaleY: 1 });
+  gsap.set(heroLines, { yPercent: 115 });
+  gsap.set("#hero .hero__eyebrow, #hero .hero__colophon", { autoAlpha: 0, y: 14 });
+  gsap.set("#hero .hero__lede, #hero .hero__actions, #hero .hero__foot", { autoAlpha: 0, y: 18 });
+  gsap.set(heroVideos, { scale: 1.12 });
+  gsap.set("#nav", { yPercent: -100 });
+
+  var intro = gsap.timeline({ defaults: { ease: "expo.out" } });
+  intro
+    .to("#loaderBar", { width: "100%", duration: 0.9, ease: "power2.inOut" })
+    .to("#loader", { scaleY: 0, duration: 1.1, ease: "expo.inOut" }, ">-0.05")
+    .to("#nav", { yPercent: 0, duration: 0.8 }, "-=0.6")
+    .to("#hero .hero__eyebrow, #hero .hero__colophon", { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.08 }, "-=0.65")
+    /* strips reveal one after another */
+    .to(heroCovers, { scaleY: 0, duration: 0.85, ease: "power4.out", stagger: 0.14 }, "-=0.35")
+    .to(heroVideos, { scale: 1, duration: 2, ease: "power3.out" }, "<")
+    /* then the title */
+    .to(heroLines, { yPercent: 0, duration: 1, stagger: 0.1 }, "-=0.25")
+    /* then the lede + buttons */
+    .to("#hero .hero__lede", { autoAlpha: 1, y: 0, duration: 0.8 }, "-=0.35")
+    .to("#hero .hero__actions", { autoAlpha: 1, y: 0, duration: 0.7 }, "-=0.4")
+    .to("#hero .hero__foot", { autoAlpha: 1, y: 0, duration: 0.6 }, "-=0.3")
+    .add(function () { var l = $("#loader"); if (l) { l.remove(); } });
+
+  /* ---------- nav show / hide on scroll direction ---------- */
+  var lastY = 0;
+  ScrollTrigger.create({
+    start: 0, end: "max",
+    onUpdate: function (self) {
+      var y = self.scroll();
+      if (y < 80) { gsap.to("#nav", { yPercent: 0, duration: 0.2 }); }
+      else if (y > lastY) { gsap.to("#nav", { yPercent: -100, duration: 0.2 }); }
+      else { gsap.to("#nav", { yPercent: 0, duration: 0.2 }); }
+      lastY = y;
+    }
+  });
+
+  /* ---------- hero scroll choreography ---------- */
+  gsap.to("#heroWall", {
+    yPercent: 12, ease: "none",
+    scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: 1.2 }
+  });
+
+  /* ---------- line reveals ---------- */
+  $$(".lines").forEach(function (block) {
+    if (block.closest("#hero")) { return; }
+    gsap.from($$(".line__i", block), {
+      yPercent: 115, duration: 1, ease: "expo.out", stagger: 0.14,
+      scrollTrigger: { trigger: block, start: "top 85%", once: true }
+    });
+  });
+
+  /* ---------- mask reveals ---------- */
+  $$("[data-mask]").forEach(function (m) {
+    if (m.closest("#hero")) { return; }
+    gsap.fromTo(m, { scaleY: 1 }, {
+      scaleY: 0, duration: 1.7, ease: "power4.out",
+      scrollTrigger: { trigger: m, start: "top 88%", once: true }
+    });
+  });
+
+  /* ---------- body copy reveals ---------- */
+  $$("[data-reveal] > *, .seg, .uprow, .armrow, .jrow").forEach(function (el) {
+    gsap.from(el, {
+      autoAlpha: 0, y: 26, duration: 0.9, ease: "expo.out",
+      scrollTrigger: { trigger: el, start: "top 90%", once: true }
+    });
+  });
+
+  /* ---------- magic text: word-by-word reveal tied to scroll ---------- */
+  $$(".magic").forEach(function (p) {
+    var words = p.textContent.trim().split(/\s+/);
+    p.textContent = "";
+    var spans = words.map(function (w) {
+      var el = document.createElement("span");
+      el.className = "magic__w";
+      el.textContent = w;
+      p.appendChild(el);
+      return el;
+    });
+    gsap.fromTo(spans, { opacity: 0.18 }, {
+      opacity: 1, ease: "none", stagger: 0.4,
+      scrollTrigger: { trigger: p, start: "top 88%", end: "top 32%", scrub: true }
+    });
+  });
+
+  /* ---------- ticker ---------- */
+  var ticker = $("#ticker");
+  if (ticker) {
+    var item = ticker.firstElementChild;
+    for (var i = 0; i < 3; i++) { ticker.appendChild(item.cloneNode(true)); }
+    gsap.to(ticker, { xPercent: -25, duration: 26, ease: "none", repeat: -1 });
+    document.addEventListener("visibilitychange", function () {
+      gsap.globalTimeline.timeScale(document.hidden ? 0 : 1);
+    });
+  }
+
+  /* ---------- reel: video filmstrip ---------- */
+  var reel = $("#reel");
+  if (reel) {
+    var reelGroup = $$(".reel__tile", reel);
+    reelGroup.forEach(function (tile) { reel.appendChild(tile.cloneNode(true)); });
+    if (reduced) {
+      $$("video", reel).forEach(function (v) { v.removeAttribute("autoplay"); v.pause(); });
+    } else {
+      $$("video", reel).forEach(function (v) { v.play && v.play().catch(function () {}); });
+      gsap.to(reel, { xPercent: -50, duration: 34, ease: "none", repeat: -1 });
+    }
+  }
+
+  window.addEventListener("load", function () { ScrollTrigger.refresh(); });
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { ScrollTrigger.refresh(); }); }
+})();
+</script>
+<!--ARTIFACT-END-->
+</body>
+</html>

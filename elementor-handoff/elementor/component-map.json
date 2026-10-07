@@ -1,0 +1,25 @@
+{
+  "global": ["People Header", "People Footer"],
+  "homepage": [
+    "Digital Hero",
+    "Scroll Fill Manifesto",
+    "Who We Are For",
+    "Color Words",
+    "Philosophy Portraits",
+    "The Space Posters",
+    "Eight Arms",
+    "Upcoming Calendar Grid"
+  ],
+  "calendar": ["Calendar Hero", "Month Index", "Event Grid"],
+  "arms": ["Arm Hero", "Arm Content Flow", "Arm Navigation"],
+  "academy": [
+    "Academy Manifesto",
+    "Tools For The Real World",
+    "Academy Formats",
+    "The Cycle",
+    "Re-Birth Journey",
+    "AI Partner",
+    "Academy Experiences",
+    "Academy Contact"
+  ]
+}

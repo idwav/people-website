@@ -1,0 +1,5 @@
+[
+  {"id":1,"day":12,"month":"April","year":2026,"status":"Upcoming","title":"Art Meets Culture","type":"Creative Dinner","venue":"PÉOPLE · Tel Aviv","image":"media/reel/reel-1.jpg"},
+  {"id":2,"day":16,"month":"April","year":2026,"status":"Upcoming","title":"Music Meets Culture","type":"Live Encounter","venue":"PÉOPLE · Tel Aviv","image":"media/reel/reel-3.jpg"},
+  {"id":3,"day":20,"month":"April","year":2026,"status":"Tickets On Sale","title":"Fashion Meets Culture","type":"Cinema · Food","venue":"PÉOPLE · Tel Aviv","image":"media/reel/reel-4.jpg"}
+]
