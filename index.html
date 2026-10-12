@@ -1532,6 +1532,70 @@
       }
       .audienceEditorial__title > span:last-child{margin-left:6%!important}
       .audienceEditorial__image--small{display:none!important}
+      #arms.arms--grid{
+        min-height:0!important;
+        padding:4.5rem 0 0!important;
+        overflow:hidden!important;
+      }
+      #arms .armsStackIntro{
+        position:relative!important;
+        top:auto!important;
+        width:auto!important;
+        height:42svh!important;
+        min-height:330px!important;
+        margin:0 20px!important;
+      }
+      #arms .armsStackIntro h2 > span:last-child{
+        right:0!important;
+        top:31%!important;
+        width:100%!important;
+        font-size:.32em!important;
+        line-height:1.1!important;
+        white-space:nowrap!important;
+        overflow:visible!important;
+      }
+      #arms .armsStackIntro .scrollWordGlide__clip{
+        overflow:visible!important;
+        margin:0!important;
+        padding:0!important;
+      }
+      #arms .armsGridTrack{
+        width:100%!important;
+        height:auto!important;
+        min-height:0!important;
+        margin:0!important;
+      }
+      #arms .armsGrid{
+        position:relative!important;
+        top:auto!important;
+        display:flex!important;
+        width:100%!important;
+        height:58svh!important;
+        min-height:460px!important;
+        margin:0!important;
+        padding:0 20px 1rem!important;
+        gap:12px!important;
+        overflow-x:auto!important;
+        overflow-y:hidden!important;
+        scroll-snap-type:x mandatory!important;
+        scroll-padding-inline:20px;
+        overscroll-behavior-inline:contain;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:none;
+      }
+      #arms .armsGrid::-webkit-scrollbar{display:none}
+      #arms .armsGrid__cell,#arms .armsGrid__cell:nth-child(n){
+        position:relative!important;
+        inset:auto!important;
+        flex:0 0 calc(100vw - 40px)!important;
+        width:calc(100vw - 40px)!important;
+        height:100%!important;
+        min-height:0!important;
+        margin:0!important;
+        transform:none!important;
+        scroll-snap-align:start!important;
+        scroll-snap-stop:always!important;
+      }
       #space.space--refined{padding-inline:20px!important}
       #space .space__top{
         display:flex!important;
@@ -1654,7 +1718,7 @@
         grid-template-columns:minmax(0,1fr)!important;
         grid-template-rows:auto 2.5rem auto auto auto!important;
         width:100%!important;
-        padding:5.5rem 20px 4.5rem!important;
+        padding:3rem 20px 4.5rem!important;
         overflow:hidden!important;
       }
       #upcoming .upcomingEditorial__heading{
@@ -2350,6 +2414,12 @@
       const mobile = matchMedia('(max-width: 820px)').matches;
       const viewport = innerHeight;
       const trackRect = armsTrack.getBoundingClientRect();
+      if (mobile) {
+        if (armsIntro) armsIntro.style.transform = '';
+        if (armsStage) armsStage.style.transform = '';
+        armsCards.forEach(card => { card.style.transform = ''; });
+        return;
+      }
       const step = viewport * (mobile ? .55 : .54);
       const overlapRem = mobile ? .12 : .28;
       const elapsed = Math.max(0, -trackRect.top);
