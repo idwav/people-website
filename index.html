@@ -1533,6 +1533,7 @@
       .audienceEditorial__title > span:last-child{margin-left:6%!important}
       .audienceEditorial__image--small{display:none!important}
       #arms.arms--grid{
+        height:calc(100svh - 53px)!important;
         min-height:0!important;
         padding:4.5rem 0 0!important;
         overflow:hidden!important;
@@ -1541,8 +1542,8 @@
         position:relative!important;
         top:auto!important;
         width:auto!important;
-        height:42svh!important;
-        min-height:330px!important;
+        height:auto!important;
+        min-height:0!important;
         margin:0 20px!important;
       }
       #arms .armsStackIntro h2 > span:last-child{
@@ -1560,8 +1561,10 @@
         padding:0!important;
       }
       #arms .armsGridTrack{
+        display:grid!important;
+        grid-template-rows:38% 62%!important;
         width:100%!important;
-        height:auto!important;
+        height:calc(100svh - 53px - 4.5rem)!important;
         min-height:0!important;
         margin:0!important;
       }
@@ -1570,8 +1573,8 @@
         top:auto!important;
         display:flex!important;
         width:100%!important;
-        height:58svh!important;
-        min-height:460px!important;
+        height:100%!important;
+        min-height:0!important;
         margin:0!important;
         padding:0 20px 1rem!important;
         gap:12px!important;
@@ -1644,13 +1647,36 @@
         text-align:left!important;
       }
       #space .panels{
-        gap:2rem!important;
+        display:grid!important;
+        grid-template-columns:repeat(3,minmax(0,1fr))!important;
+        gap:6px!important;
+        margin:0!important;
       }
       #space .panel,#space .panel:nth-child(n){
         width:100%!important;
-        height:58svh!important;
-        min-height:410px!important;
+        height:auto!important;
+        min-height:0!important;
+        aspect-ratio:3/5!important;
         margin:0!important;
+      }
+      #space .panel__media,#space .panel:nth-child(n) .panel__media{
+        height:70%!important;
+        bottom:30%!important;
+      }
+      #space .panel__media figure:nth-child(2){display:none!important}
+      #space .panel__footer{
+        height:30%!important;
+        justify-content:center!important;
+        gap:.35rem!important;
+        padding:.45rem .5rem!important;
+      }
+      #space .panel__footer .panel__cap{
+        font-size:clamp(5px,1.55vw,7px)!important;
+        line-height:1.1!important;
+      }
+      #space .panel__footer h3,#space .panel:nth-child(n) .panel__footer h3{
+        font-size:clamp(1rem,5.5vw,1.45rem)!important;
+        line-height:.78!important;
       }
       #space .space__foot{
         display:flex!important;
@@ -2450,6 +2476,23 @@
     };
     addEventListener('scroll', requestArmsUpdate, { passive: true });
     addEventListener('resize', requestArmsUpdate, { passive: true });
+    if (armsStage) {
+      let armsSnapTimer = 0;
+      const snapMobileArm = () => {
+        if (!matchMedia('(max-width: 820px)').matches) return;
+        const card = armsCards.reduce((nearest, item) =>
+          Math.abs(item.offsetLeft - armsStage.scrollLeft) < Math.abs(nearest.offsetLeft - armsStage.scrollLeft) ? item : nearest
+        , armsCards[0]);
+        if (card) armsStage.scrollTo({ left: card.offsetLeft - 20, behavior: 'smooth' });
+      };
+      const queueMobileArmSnap = () => {
+        clearTimeout(armsSnapTimer);
+        armsSnapTimer = setTimeout(snapMobileArm, 90);
+      };
+      armsStage.addEventListener('touchend', queueMobileArmSnap, { passive: true });
+      armsStage.addEventListener('pointerup', queueMobileArmSnap, { passive: true });
+      if ('onscrollend' in window) armsStage.addEventListener('scrollend', snapMobileArm, { passive: true });
+    }
     armsCards.forEach(card => {
       const link = card.querySelector('.armsGrid__action');
       if (!link) return;
