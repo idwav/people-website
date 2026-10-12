@@ -1,0 +1,1 @@
+document.querySelectorAll('[data-site-menu-toggle]').forEach(button=>button.addEventListener('click',()=>{const menu=document.querySelector('.siteMenu');const open=!menu.classList.contains('is-open');menu.classList.toggle('is-open',open);document.body.classList.toggle('site-menu-open',open);button.setAttribute('aria-expanded',String(open))}));

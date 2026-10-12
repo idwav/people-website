@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>See you at the event. — PÉOPLE</title>
+  <link rel="stylesheet" href="event-checkout.css?v=20261011-8">
+  <link rel="stylesheet" href="celebration.css?v=2">
+</head>
+<body>
+  <main class="checkout">
+    <h1><span>See you at</span><span>the event.</span></h1>
+    <div class="checkout__confirmation"><p class="checkout__note">Your place is saved.<br>We’ll be in touch with the final details.</p><button class="checkout__policy" type="button" data-policy-open>Event Cancellation Policy</button></div>
+    <a class="checkout__home" href="index.html#top">Back to the homepage ↖</a>
+    <div class="checkout__dots celebrationField" aria-hidden="true"></div>
+  </main>
+  <div class="policyModal" id="cancellation-policy" role="dialog" aria-modal="true" aria-labelledby="policy-title" hidden>
+    <button class="policyModal__backdrop" type="button" data-policy-close aria-label="Close cancellation policy"></button>
+    <article class="policyModal__panel">
+      <button class="policyModal__close" type="button" data-policy-close aria-label="Close">×</button>
+      <p class="policyModal__eyebrow">PÉOPLE · EVENTS</p>
+      <h2 id="policy-title"><span>Event</span><span>Cancellation</span><span>Policy</span></h2>
+      <p>Cancellations can be made up to 48 hours before the event. After that point, reservations are non-refundable.</p>
+      <p>If PÉOPLE cancels or reschedules an event, registered guests will be contacted directly and any payment will be refunded or transferred.</p><a class="policyModal__full" href="event-cancellation-policy.html">Read the full policy ↗</a>
+    </article>
+  </div>
+  <script src="celebration.js?v=2"></script>
+  <script>
+    const events = {
+      art:{index:'001 · Creative Dinner',title:'Art meets culture.',date:'12 April 2026',time:'19:30',place:'PÉOPLE · Tel Aviv'},
+      music:{index:'002 · Live Encounter',title:'Music meets culture.',date:'16 April 2026',time:'20:00',place:'PÉOPLE · Tel Aviv'},
+      fashion:{index:'003 · Cinema · Food',title:'Fashion meets culture.',date:'20 April 2026',time:'19:30',place:'PÉOPLE · Tel Aviv'},
+      design:{index:'005 · Design · Conversation',title:'Design meets culture.',date:'04 May 2026',time:'19:30',place:'PÉOPLE · Tel Aviv'}
+    };
+    const key = new URLSearchParams(location.search).get('event') || 'art';
+    const current = events[key] || events.art;
+
+    const policyModal = document.getElementById('cancellation-policy');
+    const openPolicy = () => { policyModal.hidden = false; document.body.classList.add('policy-is-open'); policyModal.querySelector('.policyModal__close').focus(); };
+    const closePolicy = () => { policyModal.hidden = true; document.body.classList.remove('policy-is-open'); };
+    document.querySelectorAll('[data-policy-open]').forEach(button => button.addEventListener('click', openPolicy));
+    document.querySelectorAll('[data-policy-close]').forEach(button => button.addEventListener('click', closePolicy));
+    document.addEventListener('keydown', event => { if(event.key === 'Escape' && !policyModal.hidden) closePolicy(); });
+
+  </script>
+</body>
+</html>

@@ -1465,7 +1465,7 @@
     #space .panel__footer .panel__cap{position:static!important;inset:auto!important;display:block!important;width:100%!important;margin:0!important;padding:0!important;background:transparent!important;color:#000!important;font:700 clamp(9px,.68vw,11px)/1.15 "Albert Sans",sans-serif!important;letter-spacing:.035em!important;text-align:left!important;text-transform:uppercase!important;white-space:normal!important}
     #space .panel__footer h3,#space .panel:nth-child(n) .panel__footer h3{position:static!important;inset:auto!important;width:100%!important;margin:0!important;color:#000!important;font:600 clamp(2.8rem,5.1vw,6rem)/.72 "Montserrat",sans-serif!important;letter-spacing:-.065em!important;text-align:left!important;text-transform:uppercase!important;white-space:nowrap!important}
     @media(max-width:820px){#space .space__statement{bottom:18%!important}#space .space__heroTitle span:last-child{margin-top:.12em}#space .space__foot .body{transform:translateY(-3rem)}#space .panel__footer{height:26%;gap:.65rem;padding-left:1rem;padding-right:1rem}#space .panel__footer h3,#space .panel:nth-child(n) .panel__footer h3{font-size:clamp(3rem,14vw,5rem)!important}}
-  
+
     /* COLOR STUDY B — small scattered field */
     body.color-scattered-small #color .colorFieldWord{letter-spacing:-.025em!important;line-height:1!important}
     body.color-scattered-small #color .color-dot{width:clamp(4px,.48vw,8px)!important;opacity:.2!important}
@@ -1512,7 +1512,7 @@
       <li><a href="#space"><small>006</small>The space</a></li>
       <li><a href="#arms"><small>007</small>Our arms</a></li>
       <li><a href="#upcoming"><small>009</small>Upcoming</a></li>
-      <li><a href="#join"><small>010</small>Join</a></li>
+      <li><a href="#join"><small>010</small>JOIN</a></li>
     </ol>
     <p class="mono">people@zipiromanogroup.co.il — 32° 05′ N, 34° 47′ E — Tel Aviv</p>
   </div>
@@ -1723,7 +1723,7 @@
           <span class="armsGrid__posterSide">LEARN 4 PEOPLE</span>
         </li>
         <li class="armsGrid__cell armsGrid__cell--image">
-          <a class="armsGrid__action" href="arms/people-workspace.html" aria-label="Open People Workspace"><span>Click for more info</span><b aria-hidden="true">↗</b></a>
+          <a class="armsGrid__action" href="our-space.html" aria-label="Open Our Space"><span>Click for more info</span><b aria-hidden="true">↗</b></a>
           <img src="media/space/create.png" alt="People creating together">
           <div class="armsGrid__top"><span class="armsGrid__num">003</span><h3>People<br>Work</h3></div>
           <strong class="armsGrid__posterBottom">Space</strong>
@@ -1744,7 +1744,7 @@
           <span class="armsGrid__posterSide">CREATE 4 PEOPLE</span>
         </li>
         <li class="armsGrid__cell armsGrid__cell--image">
-          <a class="armsGrid__action" href="arms/people-store.html" aria-label="Open People Store"><span>Click for more info</span><b aria-hidden="true">↗</b></a>
+          <a class="armsGrid__action" href="store.html" aria-label="Open People Store"><span>Click for more info</span><b aria-hidden="true">↗</b></a>
           <img src="media/philosophy/new/person_03/01.jpeg" alt="PÉOPLE store">
           <div class="armsGrid__top"><span class="armsGrid__num">006</span><h3>People</h3></div>
           <strong class="armsGrid__posterBottom">Store</strong>
@@ -1803,7 +1803,7 @@
       <p class="footerEditorial__office">Office</p>
       <address class="footerEditorial__address">12 Rothschild Boulevard<br>Tel Aviv, Israel · 6688109<br><span data-tlv-time>—</span></address>
       <nav class="footerEditorial__nav" aria-label="Footer"><a href="#top">Index</a><a href="#who">Community</a><a href="#space">Space</a><a href="#arms">Our arms</a><a href="#upcoming">Upcoming</a><a href="#join">Contact</a></nav>
-      <p class="footerEditorial__legal">© PÉOPLE 2026 · By Zipi Romano Group · All rights reserved</p>
+      <p class="footerEditorial__legal">© PÉOPLE 2026 · By Zipi Romano Group<span class="footerEditorial__legalLinks"><a href="privacy-policy.html">Privacy Policy</a></span></p>
     </section>
   </main>
 
@@ -2433,7 +2433,7 @@
   (() => {
     let opening = false;
     document.addEventListener('click', event => {
-      const link = event.target.closest('.armsGrid__cell a.armsGrid__action');
+      const link = event.target.closest('.armsGrid__cell a.armsGrid__action[data-preview]');
       if (!link || opening || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const href = link.getAttribute('href');
       if (!href || href.startsWith('#')) return;

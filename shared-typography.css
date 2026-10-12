@@ -1,0 +1,10 @@
+@font-face{font-family:"Montserrat";src:url("media/fonts/Montserrat-Variable.ttf") format("truetype");font-style:normal;font-weight:100 900;font-display:swap}
+@font-face{font-family:"Montserrat";src:url("media/fonts/Montserrat-Italic-Variable.ttf") format("truetype");font-style:italic;font-weight:100 900;font-display:swap}
+@font-face{font-family:"Albert Sans";src:url("media/fonts/AlbertSans-Variable.ttf") format("truetype");font-style:normal;font-weight:100 900;font-display:swap}
+@font-face{font-family:"Albert Sans";src:url("media/fonts/AlbertSans-Italic-Variable.ttf") format("truetype");font-style:italic;font-weight:100 900;font-display:swap}
+
+:root{--people-display:"Montserrat",sans-serif;--people-text:"Albert Sans",sans-serif}
+body,.siteHead,.siteHeadMenu{font-family:var(--people-text)!important;font-synthesis:none;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.page-join h1,.page-join h2,.page-join h3,
+.arm-page__title,.academy-content h2,.academy-content h3{font-family:var(--people-display)!important;font-synthesis:none;font-kerning:normal;font-feature-settings:"kern" 1}
+.page-join .standHero h1,.arm-page__title{font-weight:400!important;letter-spacing:-.055em!important;text-transform:uppercase!important}

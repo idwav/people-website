@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>404 — PÉOPLE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:#fff;color:#000}
+    body{min-height:100svh;font-family:"Albert Sans",Arial,sans-serif}
+    main{min-height:100svh;display:grid;place-items:center;padding:20px}
+    .notFound{text-align:center;text-transform:uppercase}
+    .notFound__code{display:block;margin:0 0 .7rem;font-size:10px;font-weight:600;letter-spacing:.13em}
+    h1{margin:0;font-size:clamp(1rem,1.35vw,1.35rem);font-weight:500;letter-spacing:-.035em}
+    p{margin:.5rem 0 1.35rem;font-size:10px;line-height:1.35;letter-spacing:.025em}
+    button{border:0;padding:0;background:transparent;color:inherit;font:600 10px/1 "Albert Sans",Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+    button span{display:inline-block;margin-left:.35rem;transition:transform .25s ease}
+    button:hover span,button:focus-visible span{transform:translateX(-.3rem)}
+    button:focus-visible{outline:1px solid currentColor;outline-offset:7px}
+  </style>
+</head>
+<body>
+  <main>
+    <section class="notFound" aria-labelledby="not-found-title">
+      <span class="notFound__code">404</span>
+      <h1 id="not-found-title">This page isn’t here.</h1>
+      <p>Let’s return to where you were.</p>
+      <button type="button" id="go-back">Go back <span aria-hidden="true">←</span></button>
+    </section>
+  </main>
+  <script>
+    document.getElementById('go-back').addEventListener('click', () => {
+      if (history.length > 1) history.back();
+      else location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

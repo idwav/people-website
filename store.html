@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PÉOPLE Store</title>
+  <meta name="description" content="Objects, editions and products made by and for the PÉOPLE community.">
+  <link rel="stylesheet" href="shared-footer.css?v=20261011-4">
+  <link rel="stylesheet" href="store.css?v=20261011-23">
+</head>
+<body>
+<header class="storeHead">
+  <label class="storeSearch"><input type="search" placeholder="SEARCH" aria-label="Search the store"><b aria-hidden="true">⌕</b></label>
+  <a class="storeHead__brand" href="index.html#top" aria-label="Back to PÉOPLE homepage">PÉOPLE</a>
+  <button class="storeHead__cart" type="button" aria-controls="store-cart" aria-expanded="false">CART <span>0</span></button>
+</header>
+<div class="cartBackdrop" hidden></div>
+<aside class="cartDrawer" id="store-cart" aria-hidden="true" aria-labelledby="cart-title">
+  <div class="cartDrawer__head"><h2 id="cart-title">CART <span>0</span></h2><button class="cartDrawer__close" type="button" aria-label="Close cart">×</button></div>
+  <div class="cartDrawer__items" hidden></div><div class="cartDrawer__empty"><p>YOUR CART IS EMPTY.</p><button class="cartDrawer__continue" type="button">CONTINUE SHOPPING ↙</button></div><div class="cartDrawer__checkout" hidden><div><span>SUBTOTAL</span><strong data-cart-total>₪ 0</strong></div><a href="store-checkout.html">PROCEED TO CHECKOUT ↗</a></div>
+</aside>
+<main class="store">
+  <nav class="storeCategories" aria-label="Product filters">
+    <details open class="storeCategories__filter"><summary>FILTERS</summary><div>
+      <div class="filterOption"><button class="filterOption__trigger" type="button" aria-expanded="false">PRICE <span>＋</span></button><div class="filterOption__panel"><div class="priceRange"><div class="priceRange__values"><span data-price-min>₪0</span><span data-price-max>₪300</span></div><div class="priceRange__slider"><div class="priceRange__track"></div><input data-range-min type="range" min="0" max="300" value="0" step="10" aria-label="Minimum price"><input data-range-max type="range" min="0" max="300" value="300" step="10" aria-label="Maximum price"></div></div></div></div>
+      <div class="filterOption"><button class="filterOption__trigger" type="button" aria-expanded="false">COLOR <span>＋</span></button><div class="filterOption__panel"><div class="colorOptions"><button type="button" data-filter="color" data-value="red"><i style="--swatch:#d12028"></i>RED</button><button type="button" data-filter="color" data-value="yellow"><i style="--swatch:#ffff00"></i>YELLOW</button><button type="button" data-filter="color" data-value="blue"><i style="--swatch:#004fff"></i>BLUE</button><button type="button" data-filter="color" data-value="green"><i style="--swatch:#00c112"></i>GREEN</button><button type="button" data-filter="color" data-value="pink"><i style="--swatch:#e83a95"></i>PINK</button><button type="button" data-filter="color" data-value="orange"><i style="--swatch:#f4511e"></i>ORANGE</button><button type="button" data-filter="color" data-value="cyan"><i style="--swatch:#08bfea"></i>CYAN</button><button type="button" data-filter="color" data-value="black"><i style="--swatch:#000"></i>BLACK</button><button type="button" data-filter="color" data-value="white"><i style="--swatch:#fff"></i>WHITE</button><button type="button" data-filter="color" data-value="neutral"><i style="--swatch:#c9c2b8"></i>NEUTRAL</button></div></div></div>
+      <div class="filterOption"><button class="filterOption__trigger" type="button" aria-expanded="false">AVAILABILITY <span>＋</span></button><div class="filterOption__panel"><div><button type="button" data-filter="availability" data-value="in-stock">IN STOCK</button><button type="button" data-filter="availability" data-value="sold-out">SOLD OUT</button><button type="button" data-filter="availability" data-value="upcoming">UPCOMING</button></div></div></div>
+      <label class="storeSort">SORT<select aria-label="Sort products"><option value="featured">FEATURED</option><option value="price-low">PRICE: LOW TO HIGH</option><option value="price-high">PRICE: HIGH TO LOW</option><option value="name">NAME</option></select></label>
+      <button class="clearFilters" type="button">CLEAR FILTERS</button>
+    </div></details>
+    <details open class="storeCategories__group"><summary>CATEGORIES</summary><div><button class="is-active" type="button">ALL</button><button type="button">STUDIO</button><button type="button">EDITIONS</button><button type="button">OBJECTS</button><button type="button">COMMUNITY</button></div></details>
+  </nav>
+  <section class="productGrid" id="products" aria-label="Store products">
+    <article class="productCard" data-product="cucumber" data-category="studio" data-price="220" data-color="green" data-availability="in-stock"><div class="productCard__meta"><span>001</span><span>PEOPLE STUDIO</span></div><figure><img src="media/store/cucumber-shirt.png" alt="Cucumber graphic T-shirt"></figure><div class="productCard__foot"><h2>CUCUMBER GRAPHIC T-SHIRT</h2><button class="addToCart" type="button">ADD TO CART</button><p>₪ 220</p></div></article>
+    <article class="productCard" data-product="cheese" data-category="objects" data-price="190" data-color="yellow" data-availability="upcoming"><div class="productCard__meta"><span>002</span><span>OBJECTS 4 PEOPLE</span></div><figure><img src="media/store/cheese-tote.png" alt="Yellow Cheese tote bag"></figure><div class="productCard__foot"><h2>CHEESE TOTE · YELLOW</h2><button class="addToCart" type="button">ADD TO CART</button><p>₪ 190</p></div></article>
+    <article class="productCard" data-product="dalmatian" data-category="studio" data-price="220" data-color="red" data-availability="sold-out"><div class="productCard__meta"><span>003</span><span>PEOPLE STUDIO</span></div><figure><img src="media/store/dalmatian-shirt.png" alt="Red Dalmatian graphic T-shirt"></figure><div class="productCard__foot"><h2>DALMATIAN GRAPHIC T-SHIRT</h2><button class="addToCart" type="button">ADD TO CART</button><p>₪ 220</p></div></article>
+    <article class="productCard" data-product="tomato" data-category="studio" data-price="210" data-color="red" data-availability="in-stock"><div class="productCard__meta"><span>004</span><span>PEOPLE STUDIO</span></div><figure><img src="media/store/tomato-shirt.png" alt="Tomato graphic T-shirt"></figure><div class="productCard__foot"><h2>POMODORI GRAPHIC T-SHIRT</h2><button class="addToCart" type="button">ADD TO CART</button><p>₪ 210</p></div></article>
+  </section>
+</main>
+<section class="footerEditorial" aria-labelledby="footer-title"><h2 class="footerEditorial__wordmark" id="footer-title">PÉOPLE</h2><p class="footerEditorial__tag">Culture × identity.<br>Creative community 4 people.</p><div class="footerEditorial__talk"><span>Let's talk</span><a href="mailto:people@zipiromanogroup.co.il">Book a conversation<br>30 min</a></div><p class="footerEditorial__mail"><a href="mailto:people@zipiromanogroup.co.il">people@zipiromanogroup.co.il</a><br>Tel Aviv · 24/7</p><p class="footerEditorial__office">Office</p><address class="footerEditorial__address">12 Rothschild Boulevard<br>Tel Aviv, Israel · 6688109</address><nav class="footerEditorial__nav" aria-label="Footer"><a href="index.html#top">Index</a><a href="calendar.html">Events</a><a href="our-space.html">Space</a><a href="join.html">Join</a></nav><p class="footerEditorial__legal">© PÉOPLE 2026 · By Zipi Romano Group<span class="footerEditorial__legalLinks"><a href="privacy-policy.html">Privacy Policy</a></span></p></section>
+<script>
+  const cards = [...document.querySelectorAll('.productCard')];
+  const grid = document.querySelector('.productGrid');
+  const search = document.querySelector('.storeSearch input');
+  const categoryButtons = [...document.querySelectorAll('.storeCategories__group button')];
+  const filterButtons = [...document.querySelectorAll('[data-filter]')];
+  const sort = document.querySelector('.storeSort select');
+  const clear = document.querySelector('.clearFilters');
+  const filterTriggers = [...document.querySelectorAll('.filterOption__trigger')];
+  const cartButton = document.querySelector('.storeHead__cart');
+  const cartDrawer = document.querySelector('.cartDrawer');
+  const cartBackdrop = document.querySelector('.cartBackdrop');
+  const cartClose = document.querySelector('.cartDrawer__close');
+  const cartContinue = document.querySelector('.cartDrawer__continue');
+  const cartItems = document.querySelector('.cartDrawer__items');
+  const cartEmpty = document.querySelector('.cartDrawer__empty');
+  const cartCheckout = document.querySelector('.cartDrawer__checkout');
+  const cartTotal = document.querySelector('[data-cart-total]');
+  const cartCounts = [...document.querySelectorAll('.storeHead__cart span, .cartDrawer__head h2 span')];
+  const addButtons = [...document.querySelectorAll('.addToCart')];
+  const cart = JSON.parse(localStorage.getItem('peopleStoreCart') || '[]');
+  cards.forEach(card => card.addEventListener('click', event => { if(!event.target.closest('.addToCart,.quickSizes')) location.href = `product-details.html?product=${card.dataset.product}`; }));
+  const rangeMin = document.querySelector('[data-range-min]');
+  const rangeMax = document.querySelector('[data-range-max]');
+  const priceMinLabel = document.querySelector('[data-price-min]');
+  const priceMaxLabel = document.querySelector('[data-price-max]');
+  const priceTrack = document.querySelector('.priceRange__track');
+  const state = { category: 'all', priceMin: 0, priceMax: 300, color: '', availability: '' };
+  const filterProducts = () => {
+    const query = search.value.trim().toUpperCase();
+    cards.forEach(card => {
+      const text = card.textContent.toUpperCase();
+      const price = Number(card.dataset.price);
+      const categoryMatch = state.category === 'all' || card.dataset.category === state.category;
+      const priceMatch = price >= state.priceMin && price <= state.priceMax;
+      const colorMatch = !state.color || card.dataset.color === state.color;
+      const availabilityMatch = !state.availability || card.dataset.availability === state.availability;
+      card.hidden = !(categoryMatch && priceMatch && colorMatch && availabilityMatch) || Boolean(query && !text.includes(query));
+    });
+  };
+  const sortProducts = () => {
+    const sorted = [...cards].sort((a,b) => {
+      if(sort.value === 'price-low') return Number(a.dataset.price) - Number(b.dataset.price);
+      if(sort.value === 'price-high') return Number(b.dataset.price) - Number(a.dataset.price);
+      if(sort.value === 'name') return a.querySelector('h2').textContent.localeCompare(b.querySelector('h2').textContent);
+      return cards.indexOf(a) - cards.indexOf(b);
+    });
+    sorted.forEach(card => grid.appendChild(card));
+  };
+  search.addEventListener('input', filterProducts);
+  categoryButtons.forEach(button => button.addEventListener('click', () => {
+    state.category = button.textContent.trim().toLowerCase();
+    categoryButtons.forEach(item => item.classList.toggle('is-active', item === button));
+    filterProducts();
+  }));
+  filterButtons.forEach(button => button.addEventListener('click', () => {
+    const type = button.dataset.filter;
+    const active = button.classList.contains('is-active');
+    filterButtons.filter(item => item.dataset.filter === type).forEach(item => item.classList.remove('is-active'));
+    state[type] = active ? '' : button.dataset.value;
+    button.classList.toggle('is-active', !active);
+    filterProducts();
+  }));
+  const updatePrice = event => {
+    const gap = 10;
+    let min = Number(rangeMin.value);
+    let max = Number(rangeMax.value);
+    if(max - min < gap){
+      if(event && event.target === rangeMin) min = max - gap;
+      else max = min + gap;
+    }
+    rangeMin.value = min; rangeMax.value = max;
+    state.priceMin = min; state.priceMax = max;
+    priceMinLabel.textContent = `₪${min}`;
+    priceMaxLabel.textContent = `₪${max}`;
+    priceTrack.style.setProperty('--from', `${min / 3}%`);
+    priceTrack.style.setProperty('--to', `${max / 3}%`);
+    filterProducts();
+  };
+  rangeMin.addEventListener('input', updatePrice);
+  rangeMax.addEventListener('input', updatePrice);
+  const setCartOpen = open => {
+    document.body.classList.toggle('cart-is-open', open);
+    cartDrawer.setAttribute('aria-hidden', String(!open));
+    cartButton.setAttribute('aria-expanded', String(open));
+    cartBackdrop.hidden = !open;
+  };
+  cartButton.addEventListener('click', () => setCartOpen(true));
+  cartClose.addEventListener('click', () => setCartOpen(false));
+  cartContinue.addEventListener('click', () => setCartOpen(false));
+  cartBackdrop.addEventListener('click', () => setCartOpen(false));
+  const renderCart = () => {
+    localStorage.setItem('peopleStoreCart', JSON.stringify(cart));
+    cartCounts.forEach(item => item.textContent = cart.reduce((sum,entry) => sum + (entry.quantity || 1), 0));
+    cartItems.hidden = cart.length === 0;
+    cartEmpty.hidden = cart.length > 0;
+    cartCheckout.hidden = cart.length === 0;
+    cartTotal.textContent = `₪ ${cart.reduce((sum,item) => sum + Number(item.price.replace(/[^0-9]/g,''))*(item.quantity||1),0)}`;
+    cartItems.innerHTML = cart.map((item,index) => `<article class="cartItem"><img src="${item.image}" alt=""><div><h3>${item.name}</h3><p>${item.price}</p><div class="cartQty"><button type="button" data-cart-minus="${index}">−</button><b>${item.quantity||1}</b><button type="button" data-cart-plus="${index}">＋</button></div><button type="button" data-remove="${index}">REMOVE</button></div></article>`).join('');
+    cartItems.querySelectorAll('[data-cart-minus]').forEach(button => button.addEventListener('click', () => { const item=cart[Number(button.dataset.cartMinus)]; item.quantity=Math.max(1,(item.quantity||1)-1); renderCart(); }));
+    cartItems.querySelectorAll('[data-cart-plus]').forEach(button => button.addEventListener('click', () => { const item=cart[Number(button.dataset.cartPlus)]; item.quantity=(item.quantity||1)+1; renderCart(); }));
+    cartItems.querySelectorAll('[data-remove]').forEach(button => button.addEventListener('click', () => { cart.splice(Number(button.dataset.remove),1); renderCart(); }));
+  };
+  const sizesFor = card => card.dataset.product === 'cheese' ? [] : ['S','M','L','XL'];
+  addButtons.forEach(button => {
+    const card = button.closest('.productCard');
+    const picker = document.createElement('div');
+    picker.className = 'quickSizes';
+    picker.innerHTML = `<span>SELECT SIZE</span>${sizesFor(card).map(size => `<button type="button" data-quick-size="${size}">${size}</button>`).join('')}`;
+    button.parentElement.appendChild(picker);
+    button.addEventListener('click', event => {
+      event.stopPropagation();
+      if(!sizesFor(card).length){
+        cart.push({ name: card.querySelector('h2').textContent, price: card.querySelector('.productCard__foot p').textContent, image: card.querySelector('img').src, quantity: 1 });
+        renderCart(); setCartOpen(true); return;
+      }
+      document.querySelectorAll('.quickSizes.is-open').forEach(item => { if(item !== picker) item.classList.remove('is-open'); });
+      picker.classList.toggle('is-open');
+    });
+    picker.querySelectorAll('[data-quick-size]').forEach(sizeButton => sizeButton.addEventListener('click', event => {
+      event.stopPropagation();
+      cart.push({ name: `${card.querySelector('h2').textContent} · ${sizeButton.dataset.quickSize}`, price: card.querySelector('.productCard__foot p').textContent, image: card.querySelector('img').src, quantity: 1 });
+      picker.classList.remove('is-open');
+      renderCart(); setCartOpen(true);
+    }));
+  });
+  renderCart();
+  document.addEventListener('click', event => { if(!event.target.closest('.quickSizes,.addToCart')) document.querySelectorAll('.quickSizes.is-open').forEach(item => item.classList.remove('is-open')); });
+  document.addEventListener('keydown', event => { if(event.key === 'Escape') setCartOpen(false); });
+  sort.addEventListener('change', sortProducts);
+  filterTriggers.forEach(trigger => trigger.addEventListener('click', () => {
+    const option = trigger.closest('.filterOption');
+    const open = !option.classList.contains('is-open');
+    option.classList.toggle('is-open', open);
+    trigger.setAttribute('aria-expanded', String(open));
+    trigger.querySelector('span').textContent = open ? '−' : '＋';
+  }));
+  clear.addEventListener('click', () => {
+    state.category = 'all'; state.priceMin = 0; state.priceMax = 300; state.color = ''; state.availability = '';
+    rangeMin.value = 0; rangeMax.value = 300; updatePrice();
+    search.value = ''; sort.value = 'featured';
+    categoryButtons.forEach(button => button.classList.toggle('is-active', button.textContent.trim() === 'ALL'));
+    filterButtons.forEach(button => button.classList.remove('is-active'));
+    sortProducts(); filterProducts();
+  });
+</script>
+</body>
+</html>

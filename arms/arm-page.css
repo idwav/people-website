@@ -25,3 +25,5 @@
 .siteHead.is-scrolled{background:var(--accent)!important;box-shadow:0 1px 0 color-mix(in srgb,#fff 20%,transparent)}
 .arm-page__index{display:none!important}.arm-page__brand{order:2}.arm-page__back{order:3;position:absolute;left:22px;top:64px;z-index:12;color:#fff!important;border-color:#fff!important;box-shadow:none!important}
 @media(max-width:760px){.arm-page__back{left:18px;top:54px;width:2.85rem;height:2.85rem}.arm-page__back b{font-size:1.75rem}}
+.arm-content__policies{grid-column:2;margin-top:2rem;font-size:10px;text-transform:uppercase}.arm-content__policies a{color:inherit;text-underline-offset:.25em}
+.arm-content__policies a{display:inline-block;font-weight:700;letter-spacing:.03em;border-bottom:1.5px solid currentColor;text-decoration:none;padding-bottom:.12rem;line-height:1.55}

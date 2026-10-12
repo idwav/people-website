@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PÉOPLE — Product</title>
+  <meta name="description" content="PÉOPLE store product details.">
+  <link rel="stylesheet" href="shared-footer.css?v=20261011-4">
+  <link rel="stylesheet" href="product-details.css?v=20261011-13">
+</head>
+<body>
+<header class="productHead">
+  <a class="productHead__back" href="store.html">← BACK TO STORE</a>
+  <a class="productHead__brand" href="index.html#top">PÉOPLE</a>
+  <button class="productHead__cart" type="button" aria-controls="product-cart" aria-expanded="false">CART <span>0</span></button>
+</header>
+<div class="productCartBackdrop" hidden></div><aside class="productCart" id="product-cart" aria-hidden="true"><header><h2>CART <span>0</span></h2><button class="productCart__close" type="button" aria-label="Close cart">×</button></header><div class="productCart__items" hidden></div><div class="productCart__empty"><p>YOUR CART IS EMPTY.</p></div><div class="productCart__checkout" hidden><div><span>SUBTOTAL</span><strong data-product-cart-total></strong></div><a href="store-checkout.html">PROCEED TO CHECKOUT ↗</a></div></aside>
+<main class="productHero">
+  <figure class="productHero__visual"><img data-product-image src="" alt=""></figure>
+  <section class="productHero__info">
+    <div class="productHero__topline"><span data-product-index></span><span data-product-collection></span><span class="productStatus" data-product-status></span></div>
+    <div class="productHero__copy"><h1 data-product-title></h1><p data-product-description></p><button class="sizeGuideLink" type="button" data-size-guide-open>SIZE GUIDE ↗</button></div>
+    <div class="productHero__purchase"><div class="priceBlock"><span>PRICE</span><strong data-product-price></strong></div><div class="sizePicker"><div class="purchaseLabel"><span>SELECT SIZE</span></div><button class="sizePicker__trigger" type="button" aria-expanded="false"><b data-size-value>CHOOSE A SIZE</b><i></i></button><div class="sizePicker__menu" data-product-size></div></div><div class="quantityPicker"><span>QUANTITY</span><div><button type="button" data-qty-minus>−</button><b data-qty-value>1</b><button type="button" data-qty-plus>＋</button></div></div><button class="productHero__add" type="button">ADD TO CART ↗</button></div>
+  </section>
+</main>
+<div class="sizeGuideBackdrop" data-size-guide-close hidden></div>
+<section class="sizeGuideModal" role="dialog" aria-modal="true" aria-labelledby="size-guide-title" aria-hidden="true">
+  <button class="sizeGuideModal__close" type="button" data-size-guide-close aria-label="Close size guide">×</button>
+  <span>PÉOPLE · STUDIO</span>
+  <h2 id="size-guide-title">SIZE GUIDE</h2>
+  <p>Relaxed oversized fit. Measurements are taken flat across the garment.</p>
+  <table><thead><tr><th>SIZE</th><th>CHEST</th><th>LENGTH</th><th>SLEEVE</th></tr></thead><tbody><tr><td>S</td><td>54 CM</td><td>68 CM</td><td>22 CM</td></tr><tr><td>M</td><td>57 CM</td><td>71 CM</td><td>23 CM</td></tr><tr><td>L</td><td>60 CM</td><td>74 CM</td><td>24 CM</td></tr><tr><td>XL</td><td>64 CM</td><td>77 CM</td><td>25 CM</td></tr></tbody></table>
+  <small>BETWEEN SIZES? CHOOSE THE LARGER SIZE FOR A LOOSER FIT.</small>
+</section>
+<section class="footerEditorial" aria-labelledby="footer-title"><h2 class="footerEditorial__wordmark" id="footer-title">PÉOPLE</h2><p class="footerEditorial__tag">Culture × identity.<br>Creative community 4 people.</p><div class="footerEditorial__talk"><span>Let's talk</span><a href="mailto:people@zipiromanogroup.co.il">Book a conversation<br>30 min</a></div><p class="footerEditorial__mail"><a href="mailto:people@zipiromanogroup.co.il">people@zipiromanogroup.co.il</a><br>Tel Aviv · 24/7</p><p class="footerEditorial__office">Office</p><address class="footerEditorial__address">12 Rothschild Boulevard<br>Tel Aviv, Israel · 6688109</address><nav class="footerEditorial__nav" aria-label="Footer"><a href="index.html#top">Index</a><a href="calendar.html">Events</a><a href="our-space.html">Space</a><a href="join.html">Join</a></nav><p class="footerEditorial__legal">© PÉOPLE 2026 · By Zipi Romano Group<span class="footerEditorial__legalLinks"><a href="privacy-policy.html">Privacy Policy</a></span></p></section>
+<script>
+const products={
+  cucumber:{index:'001',collection:'PEOPLE STUDIO',status:'IN STOCK',statusClass:'in-stock',title:'CUCUMBER GRAPHIC T-SHIRT',description:'A relaxed graphic T-shirt built around a crisp cucumber study. Soft cotton, oversized shape and a print made for everyday wear.',price:'₪ 220',image:'media/store/cucumber-shirt.png',sizes:['S','M','L','XL']},
+  cheese:{index:'002',collection:'OBJECTS 4 PEOPLE',status:'UPCOMING',statusClass:'upcoming',title:'CHEESE TOTE · YELLOW',description:'A bright everyday carry with long handles, generous space and a playful cheese character printed in black.',price:'₪ 190',image:'media/store/cheese-tote.png',sizes:[]},
+  dalmatian:{index:'003',collection:'PEOPLE STUDIO',status:'SOLD OUT',statusClass:'sold-out',title:'DALMATIAN GRAPHIC T-SHIRT',description:'A vivid red oversized T-shirt featuring two Dalmatian studies in sharp black and white.',price:'₪ 220',image:'media/store/dalmatian-shirt.png',sizes:['S','M','L','XL']},
+  tomato:{index:'004',collection:'PEOPLE STUDIO',status:'IN STOCK',statusClass:'in-stock',title:'POMODORI GRAPHIC T-SHIRT',description:'A soft white T-shirt with a hand-drawn tomato composition, relaxed proportions and an easy everyday fit.',price:'₪ 210',image:'media/store/tomato-shirt.png',sizes:['S','M','L','XL']}
+};
+const key=new URLSearchParams(location.search).get('product')||'cucumber';
+const product=products[key]||products.cucumber;
+document.title=`PÉOPLE — ${product.title}`;
+document.querySelector('[data-product-image]').src=product.image;
+document.querySelector('[data-product-image]').alt=product.title;
+document.querySelector('[data-product-index]').textContent=product.index;
+document.querySelector('[data-product-collection]').textContent=product.collection;
+const status=document.querySelector('[data-product-status]'); status.textContent=product.status; status.classList.add(product.statusClass);
+document.querySelector('[data-product-title]').textContent=product.title;
+document.querySelector('[data-product-description]').textContent=product.description;
+document.querySelector('[data-product-price]').textContent=product.price;
+const add=document.querySelector('.productHero__add');
+const qtyValue=document.querySelector('[data-qty-value]');let selectedQty=1;document.querySelector('[data-qty-minus]').addEventListener('click',()=>{selectedQty=Math.max(1,selectedQty-1);qtyValue.textContent=selectedQty;});document.querySelector('[data-qty-plus]').addEventListener('click',()=>{selectedQty+=1;qtyValue.textContent=selectedQty;});
+const sizeMenu=document.querySelector('[data-product-size]');
+const sizePicker=document.querySelector('.sizePicker');
+const sizeTrigger=document.querySelector('.sizePicker__trigger');
+const sizeValue=document.querySelector('[data-size-value]');
+const sizeGuide=document.querySelector('.sizeGuideModal'),sizeGuideBackdrop=document.querySelector('.sizeGuideBackdrop'),sizeGuideOpen=document.querySelector('[data-size-guide-open]');
+const setSizeGuideOpen=open=>{document.body.classList.toggle('size-guide-open',open);sizeGuide.setAttribute('aria-hidden',String(!open));sizeGuideBackdrop.hidden=!open;};
+sizeGuideOpen.addEventListener('click',()=>setSizeGuideOpen(true));document.querySelectorAll('[data-size-guide-close]').forEach(item=>item.addEventListener('click',()=>setSizeGuideOpen(false)));
+if(product.sizes.length){
+  const sizeNames={S:'SMALL',M:'MEDIUM',L:'LARGE',XL:'EXTRA LARGE'};sizeMenu.innerHTML=product.sizes.map(item=>`<button type="button" data-size="${item}" data-size-name="${sizeNames[item]}">${sizeNames[item]}</button>`).join('');
+  add.disabled=true;
+}else{
+  sizePicker.hidden=true;
+}
+sizeTrigger.addEventListener('click',()=>{const open=!sizePicker.classList.contains('is-open');sizePicker.classList.toggle('is-open',open);sizeTrigger.setAttribute('aria-expanded',String(open));sizeTrigger.querySelector('i').textContent='';});
+sizeMenu.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{sizeValue.textContent=button.dataset.sizeName;sizeMenu.querySelectorAll('button').forEach(item=>item.classList.toggle('is-selected',item===button));sizePicker.classList.remove('is-open');sizeTrigger.setAttribute('aria-expanded','false');sizeTrigger.querySelector('i').textContent='';if(product.statusClass!=='sold-out')add.disabled=false;}));
+document.addEventListener('click',event=>{if(!event.target.closest('.sizePicker')){sizePicker.classList.remove('is-open');sizeTrigger.setAttribute('aria-expanded','false');sizeTrigger.querySelector('i').textContent='';}});
+if(product.statusClass==='sold-out'){add.textContent='SOLD OUT';add.disabled=true;}
+const cartButton=document.querySelector('.productHead__cart'),cartPanel=document.querySelector('.productCart'),cartBackdrop=document.querySelector('.productCartBackdrop'),cartClose=document.querySelector('.productCart__close'),cartItems=document.querySelector('.productCart__items'),cartEmpty=document.querySelector('.productCart__empty'),cartCheckout=document.querySelector('.productCart__checkout');
+let productCart=JSON.parse(localStorage.getItem('peopleStoreCart')||'[]');
+const setCartOpen=open=>{document.body.classList.toggle('product-cart-open',open);cartPanel.setAttribute('aria-hidden',String(!open));cartButton.setAttribute('aria-expanded',String(open));cartBackdrop.hidden=!open;};
+const renderProductCart=()=>{
+  localStorage.setItem('peopleStoreCart',JSON.stringify(productCart));
+  document.querySelectorAll('.productHead__cart span,.productCart h2 span').forEach(item=>item.textContent=String(productCart.reduce((sum,item)=>sum+(item.quantity||1),0)));
+  cartItems.hidden=!productCart.length;cartEmpty.hidden=Boolean(productCart.length);cartCheckout.hidden=!productCart.length;
+  cartItems.innerHTML=productCart.map((item,index)=>`<article><img src="${item.image}" alt=""><div><h3>${item.name}</h3><p>${item.size?item.size+' · ':''}${item.price}</p><div class="cartQty"><button type="button" data-cart-minus="${index}">−</button><b>${item.quantity||1}</b><button type="button" data-cart-plus="${index}">＋</button></div><button type="button" data-remove="${index}">REMOVE</button></div></article>`).join('');
+  const total=productCart.reduce((sum,item)=>sum+Number(String(item.price).replace(/[^0-9]/g,''))*(item.quantity||1),0);document.querySelector('[data-product-cart-total]').textContent=`₪ ${total}`;
+  cartItems.querySelectorAll('[data-cart-minus]').forEach(button=>button.addEventListener('click',()=>{const item=productCart[Number(button.dataset.cartMinus)];item.quantity=Math.max(1,(item.quantity||1)-1);renderProductCart();}));cartItems.querySelectorAll('[data-cart-plus]').forEach(button=>button.addEventListener('click',()=>{const item=productCart[Number(button.dataset.cartPlus)];item.quantity=(item.quantity||1)+1;renderProductCart();}));
+  cartItems.querySelectorAll('[data-remove]').forEach(button=>button.addEventListener('click',()=>{productCart.splice(Number(button.dataset.remove),1);renderProductCart();}));
+};
+cartButton.addEventListener('click',()=>setCartOpen(true));cartClose.addEventListener('click',()=>setCartOpen(false));cartBackdrop.addEventListener('click',()=>setCartOpen(false));document.addEventListener('keydown',event=>{if(event.key==='Escape'){setCartOpen(false);setSizeGuideOpen(false);}});
+add.addEventListener('click',()=>{productCart.push({name:product.title,price:product.price,image:product.image,size:product.sizes.length?sizeValue.textContent:'',quantity:selectedQty});renderProductCart();add.textContent='ADDED TO CART ✓';setCartOpen(true);});
+renderProductCart();
+</script>
+</body>
+</html>
